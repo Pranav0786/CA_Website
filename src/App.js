@@ -2,19 +2,25 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import CA from './pages/CA';
-import Businessman from "./pages/Businessman";
-import Loader from "./pages/Loader"; 
-
+import CA from './components/CA/CA';
+import Businessman from "./components/Businessman/Businessman";
+import Loader from "./pages/Loader";
+import AccountingPage from "./components/CA/AccountingPage"; 
+import TaxationPage from "./components/CA/TaxationPage";
+import AuditPage from "./components/CA/AuditPage";
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Loader />} /> 
-        <Route path="/register" element={<Register />} /> 
+        <Route path="/" element={<Loader />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/ca" element={<CA />} />
         <Route path="/businessman" element={<Businessman />} />
+        <Route path="/accounting" element={<AccountingPage />} /> 
+        <Route path="/taxation" element={<TaxationPage />} />
+        <Route path="/audits" element={<AuditPage />} />
+
       </Routes>
     </BrowserRouter>
   );
