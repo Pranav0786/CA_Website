@@ -5,6 +5,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileUpload, faFileInvoice, faCalendar, faDollarSign, faStickyNote, faUsers, faEnvelope, faPhoneAlt, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import Navbar from "./Navbar";
+
 const AccountingPage = () => {
   const [activeTab, setActiveTab] = useState("data-entry");
   const [uploadData, setUploadData] = useState({
@@ -96,102 +97,26 @@ const AccountingPage = () => {
     }
   };
 
-  // Styling
-  const containerStyle = {
-    maxWidth: "960px",
-    margin: "0 auto",
-    padding: "32px",
-    backgroundColor: "#f8f9fa",
-    borderRadius: "12px",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-  };
-
-  const headerStyle = {
-    fontSize: "36px",
-    fontWeight: "700",
-    textAlign: "center",
-    marginBottom: "32px",
-    color: "#333",
-    fontFamily: "Roboto, sans-serif",
-  };
-
-  const tabButtonStyle = (isActive) => ({
-    padding: "12px 24px",
-    fontSize: "18px",
-    fontWeight: "600",
-    borderRadius: "8px",
-    backgroundColor: isActive ? "#ff7f50" : "#f1f1f1",
-    color: isActive ? "#fff" : "#495057",
-    border: "none",
-    cursor: "pointer",
-    transition: "0.3s",
-    transform: isActive ? "scale(1.05)" : "scale(1)",
-    boxShadow: isActive ? "0 4px 6px rgba(0, 0, 0, 0.2)" : "none",
-  });
-
-  const tabContentStyle = {
-    marginBottom: "32px",
-    padding: "32px",
-    backgroundColor: "#ffffff",
-    borderRadius: "12px",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-  };
-
-  const labelStyle = {
-    fontSize: "16px",
-    fontWeight: "500",
-    color: "#495057",
-    marginBottom: "8px",
-    display: "flex",
-    alignItems: "center",
-  };
-
-  const inputStyle = {
-    padding: "12px",
-    width: "100%",
-    borderRadius: "8px",
-    border: "2px solid #ced4da",
-    marginBottom: "20px",
-    fontSize: "16px",
-    outline: "none",
-    transition: "border 0.3s ease",
-  };
-
-  const buttonStyle = {
-    backgroundColor: "#ff7f50",
-    color: "#fff",
-    padding: "12px 24px",
-    borderRadius: "8px",
-    marginTop: "24px",
-    cursor: "pointer",
-    border: "none",
-    transition: "background-color 0.3s ease",
-  };
-
-  const buttonHoverStyle = {
-    backgroundColor: "#ff7f50",
-  };
-
   return (
-    <div style={containerStyle}>
-      <Navbar/>
-      <h1 style={headerStyle}>Accounting Dashboard</h1>
+    <div className="max-w-4xl mx-auto p-8 bg-gray-50 rounded-xl shadow-lg">
+      <Navbar />
+      <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-8">Accounting Dashboard</h1>
 
-      <div style={{ display: "flex", justifyContent: "center", marginBottom: "32px", gap: "24px" }}>
+      <div className="flex justify-center gap-6 mb-8">
         <button
-          style={tabButtonStyle(activeTab === "data-entry")}
+          className={`px-6 py-3 text-xl font-semibold rounded-lg ${activeTab === "data-entry" ? "bg-orange-500 text-white" : "bg-gray-200 text-gray-700"}`}
           onClick={() => setActiveTab("data-entry")}
         >
           Data Entry
         </button>
         <button
-          style={tabButtonStyle(activeTab === "financial-reports")}
+          className={`px-6 py-3 text-xl font-semibold rounded-lg ${activeTab === "financial-reports" ? "bg-orange-500 text-white" : "bg-gray-200 text-gray-700"}`}
           onClick={() => setActiveTab("financial-reports")}
         >
           Financial Reports
         </button>
         <button
-          style={tabButtonStyle(activeTab === "client-management")}
+          className={`px-6 py-3 text-xl font-semibold rounded-lg ${activeTab === "client-management" ? "bg-orange-500 text-white" : "bg-gray-200 text-gray-700"}`}
           onClick={() => setActiveTab("client-management")}
         >
           Client Management
@@ -200,145 +125,156 @@ const AccountingPage = () => {
 
       {/* Data Entry Tab */}
       {activeTab === "data-entry" && (
-        <section style={tabContentStyle}>
-          <h2 style={{ fontSize: "24px", fontWeight: "700", marginBottom: "24px" }}>Data Entry & Upload</h2>
+        <section className="bg-white p-8 rounded-xl shadow-md mb-8">
+          <h2 className="text-2xl font-bold mb-6">Data Entry & Upload</h2>
           <div>
-            <label style={labelStyle}>
-              <FontAwesomeIcon icon={faFileUpload} style={{ marginRight: "8px" }} />
+            <label className="flex items-center text-lg font-medium text-gray-700 mb-2">
+              <FontAwesomeIcon icon={faFileUpload} className="mr-3" />
               Upload File:
             </label>
-            <input type="file" onChange={handleFileUpload} style={inputStyle} />
-            <label style={labelStyle}>
-              <FontAwesomeIcon icon={faFileInvoice} style={{ marginRight: "8px" }} />
+            <input type="file" onChange={handleFileUpload} className="w-full p-4 border-2 border-gray-300 rounded-lg mb-4" />
+            <label className="flex items-center text-lg font-medium text-gray-700 mb-2">
+              <FontAwesomeIcon icon={faFileInvoice} className="mr-3" />
               Type:
             </label>
             <select
               onChange={(e) => setUploadData({ ...uploadData, type: e.target.value })}
-              style={inputStyle}
+              className="w-full p-4 border-2 border-gray-300 rounded-lg mb-4"
             >
               <option value="Invoice">Invoice</option>
               <option value="Receipt">Receipt</option>
               <option value="Bill">Bill</option>
             </select>
-            <label style={labelStyle}>
-              <FontAwesomeIcon icon={faCalendar} style={{ marginRight: "8px" }} />
+            <label className="flex items-center text-lg font-medium text-gray-700 mb-2">
+              <FontAwesomeIcon icon={faCalendar} className="mr-3" />
               Date:
             </label>
             <input
               type="date"
               onChange={(e) => setUploadData({ ...uploadData, date: e.target.value })}
-              style={inputStyle}
+              className="w-full p-4 border-2 border-gray-300 rounded-lg mb-4"
             />
-            <label style={labelStyle}>
-              <FontAwesomeIcon icon={faDollarSign} style={{ marginRight: "8px" }} />
+            <label className="flex items-center text-lg font-medium text-gray-700 mb-2">
+              <FontAwesomeIcon icon={faDollarSign} className="mr-3" />
               Amount:
             </label>
             <input
               type="number"
               placeholder="Amount"
               onChange={(e) => setUploadData({ ...uploadData, amount: e.target.value })}
-              style={inputStyle}
+              className="w-full p-4 border-2 border-gray-300 rounded-lg mb-4"
             />
-            <label style={labelStyle}>
-              <FontAwesomeIcon icon={faStickyNote} style={{ marginRight: "8px" }} />
+            <label className="flex items-center text-lg font-medium text-gray-700 mb-2">
+              <FontAwesomeIcon icon={faStickyNote} className="mr-3" />
               Notes:
             </label>
             <textarea
               placeholder="Notes"
               onChange={(e) => setUploadData({ ...uploadData, notes: e.target.value })}
-              style={{ ...inputStyle, height: "100px" }}
+              className="w-full p-4 border-2 border-gray-300 rounded-lg mb-6 h-32"
             />
-            <button onClick={handleSubmitUpload} style={buttonStyle}>
+            <button
+              onClick={handleSubmitUpload}
+              className="w-full bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600"
+            >
               Upload
             </button>
           </div>
         </section>
       )}
 
+      {/* Financial Reports Tab */}
       {activeTab === "financial-reports" && (
-        <section style={tabContentStyle}>
-          <h2 style={{ fontSize: "24px", fontWeight: "700", marginBottom: "24px" }}>Generate Reports</h2>
+        <section className="bg-white p-8 rounded-xl shadow-md mb-8">
+          <h2 className="text-2xl font-bold mb-6">Generate Reports</h2>
           <div>
-            <label style={labelStyle}>
-              <FontAwesomeIcon icon={faFileInvoice} style={{ marginRight: "8px" }} />
+            <label className="flex items-center text-lg font-medium text-gray-700 mb-2">
+              <FontAwesomeIcon icon={faFileInvoice} className="mr-3" />
               Report Type:
             </label>
             <select
               onChange={(e) => setReportData({ ...reportData, type: e.target.value })}
-              style={inputStyle}
+              className="w-full p-4 border-2 border-gray-300 rounded-lg mb-4"
             >
               <option value="Balance Sheet">Balance Sheet</option>
               <option value="Profit & Loss">Profit & Loss</option>
             </select>
-            <label style={labelStyle}>
-              <FontAwesomeIcon icon={faCalendar} style={{ marginRight: "8px" }} />
+            <label className="flex items-center text-lg font-medium text-gray-700 mb-2">
+              <FontAwesomeIcon icon={faCalendar} className="mr-3" />
               Start Date:
             </label>
             <input
               type="date"
               onChange={(e) => setReportData({ ...reportData, startDate: e.target.value })}
-              style={inputStyle}
+              className="w-full p-4 border-2 border-gray-300 rounded-lg mb-4"
             />
-            <label style={labelStyle}>
-              <FontAwesomeIcon icon={faCalendar} style={{ marginRight: "8px" }} />
+            <label className="flex items-center text-lg font-medium text-gray-700 mb-2">
+              <FontAwesomeIcon icon={faCalendar} className="mr-3" />
               End Date:
             </label>
             <input
               type="date"
               onChange={(e) => setReportData({ ...reportData, endDate: e.target.value })}
-              style={inputStyle}
+              className="w-full p-4 border-2 border-gray-300 rounded-lg mb-6"
             />
-            <button onClick={handleReportGeneration} style={buttonStyle}>
+            <button
+              onClick={handleReportGeneration}
+              className="w-full bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600"
+            >
               Generate Report
             </button>
           </div>
         </section>
       )}
 
+      {/* Client Management Tab */}
       {activeTab === "client-management" && (
-        <section style={tabContentStyle}>
-          <h2 style={{ fontSize: "24px", fontWeight: "700", marginBottom: "24px" }}>Manage Clients</h2>
+        <section className="bg-white p-8 rounded-xl shadow-md mb-8">
+          <h2 className="text-2xl font-bold mb-6">Manage Clients</h2>
           <div>
-            <label style={labelStyle}>
-              <FontAwesomeIcon icon={faUsers} style={{ marginRight: "8px" }} />
+            <label className="flex items-center text-lg font-medium text-gray-700 mb-2">
+              <FontAwesomeIcon icon={faUsers} className="mr-3" />
               Client Name:
             </label>
             <input
               type="text"
               placeholder="Client Name"
               onChange={(e) => setClientData({ ...clientData, name: e.target.value })}
-              style={inputStyle}
+              className="w-full p-4 border-2 border-gray-300 rounded-lg mb-4"
             />
-            <label style={labelStyle}>
-              <FontAwesomeIcon icon={faEnvelope} style={{ marginRight: "8px" }} />
+            <label className="flex items-center text-lg font-medium text-gray-700 mb-2">
+              <FontAwesomeIcon icon={faEnvelope} className="mr-3" />
               Email:
             </label>
             <input
               type="email"
               placeholder="Email"
               onChange={(e) => setClientData({ ...clientData, email: e.target.value })}
-              style={inputStyle}
+              className="w-full p-4 border-2 border-gray-300 rounded-lg mb-4"
             />
-            <label style={labelStyle}>
-              <FontAwesomeIcon icon={faPhoneAlt} style={{ marginRight: "8px" }} />
+            <label className="flex items-center text-lg font-medium text-gray-700 mb-2">
+              <FontAwesomeIcon icon={faPhoneAlt} className="mr-3" />
               Phone:
             </label>
             <input
               type="tel"
               placeholder="Phone"
               onChange={(e) => setClientData({ ...clientData, phone: e.target.value })}
-              style={inputStyle}
+              className="w-full p-4 border-2 border-gray-300 rounded-lg mb-4"
             />
-            <label style={labelStyle}>
-              <FontAwesomeIcon icon={faMapMarkerAlt} style={{ marginRight: "8px" }} />
+            <label className="flex items-center text-lg font-medium text-gray-700 mb-2">
+              <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-3" />
               Address:
             </label>
             <textarea
               placeholder="Address"
               onChange={(e) => setClientData({ ...clientData, address: e.target.value })}
-              style={{ ...inputStyle, height: "100px" }}
+              className="w-full p-4 border-2 border-gray-300 rounded-lg mb-6 h-32"
             />
-            <button onClick={handleClientSubmit} style={buttonStyle}>
+            <button
+              onClick={handleClientSubmit}
+              className="w-full bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600"
+            >
               Add Client
             </button>
           </div>
@@ -349,4 +285,3 @@ const AccountingPage = () => {
 };
 
 export default AccountingPage;
-

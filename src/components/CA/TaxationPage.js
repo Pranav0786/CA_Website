@@ -3,6 +3,7 @@ import { db, storage } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection, addDoc } from "firebase/firestore";
 import Navbar from "./Navbar";
+
 const TaxationPage = () => {
   const [taxDetails, setTaxDetails] = useState({
     income: "",
@@ -39,7 +40,7 @@ const TaxationPage = () => {
     const exemptions = parseFloat(taxDetails.exemptions) || 0;
 
     const taxableIncome = income - deductions - exemptions;
-    const taxAmount = taxableIncome > 100000 ? taxableIncome * 0.1 : 0; 
+    const taxAmount = taxableIncome > 100000 ? taxableIncome * 0.1 : 0;
     setTaxResult(taxAmount);
 
     alert(`Calculated Tax: ₹${taxAmount}`);
@@ -120,86 +121,27 @@ const TaxationPage = () => {
     }
   };
 
-  const containerStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    margin: "20px",
-  };
-  
-  const headerStyle = {
-    fontSize: "32px",
-    fontWeight: "bold",
-    marginBottom: "16px",
-  };
-  
-  const tabButtonStyle = (isActive) => ({
-    padding: "10px 20px",
-    margin: "0 10px",
-    backgroundColor: isActive ? "#ff7f50" : "#ccc",
-    color: "white",
-    border: "none",
-    cursor: "pointer",
-    borderRadius: "5px",
-  });
-  
-  const tabContentStyle = {
-    padding: "20px",
-    backgroundColor: "#f9f9f9",
-    borderRadius: "8px",
-    width: "100%",
-    maxWidth: "800px",
-  };
-  
-  const inputStyle = {
-    padding: "10px",
-    fontSize: "16px",
-    margin: "8px 0",
-    width: "100%",
-    maxWidth: "300px",
-    border: "1px solid #ccc",
-    borderRadius: "5px",
-  };
-  
-  const labelStyle = {
-    fontSize: "16px",
-    fontWeight: "600",
-    marginBottom: "8px",
-    display: "block",
-  };
-  
-  const buttonStyle = {
-    padding: "12px 24px",
-    backgroundColor: "#ff7f50",
-    color: "white",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-  };
-  
-  
-
   return (
-    <div style={containerStyle}>
-      <Navbar/>
-      <h1 style={headerStyle}>Taxation Dashboard</h1>
+    <div className="flex flex-col items-center p-5">
+      <Navbar />
+      <h1 className="text-3xl font-bold mb-8">Taxation Dashboard</h1>
 
       {/* Tabs Navigation */}
-      <div style={{ marginBottom: "32px" }}>
+      <div className="mb-8">
         <button
-          style={tabButtonStyle(activeTab === "tax-calculation")}
+          className={`px-6 py-2 mx-2 text-white rounded-lg ${activeTab === "tax-calculation" ? "bg-orange-500" : "bg-gray-300"}`}
           onClick={() => handleTabChange("tax-calculation")}
         >
           Tax Calculation Tools
         </button>
         <button
-          style={tabButtonStyle(activeTab === "file-upload")}
+          className={`px-6 py-2 mx-2 text-white rounded-lg ${activeTab === "file-upload" ? "bg-orange-500" : "bg-gray-300"}`}
           onClick={() => handleTabChange("file-upload")}
         >
           Tax Filing Support
         </button>
         <button
-          style={tabButtonStyle(activeTab === "regulatory-updates")}
+          className={`px-6 py-2 mx-2 text-white rounded-lg ${activeTab === "regulatory-updates" ? "bg-orange-500" : "bg-gray-300"}`}
           onClick={() => handleTabChange("regulatory-updates")}
         >
           Regulatory Updates
@@ -208,50 +150,52 @@ const TaxationPage = () => {
 
       {/* Tax Calculation Tools Tab */}
       {activeTab === "tax-calculation" && (
-        <section style={tabContentStyle}>
-          <h2 style={{ fontSize: "24px", fontWeight: "700", marginBottom: "24px" }}>Tax Calculation Tools</h2>
+        <section className="bg-gray-100 p-6 rounded-lg w-full max-w-2xl">
+          <h2 className="text-2xl font-bold mb-6">Tax Calculation Tools</h2>
           <div>
-            <label style={labelStyle}>Income:</label>
+            <label className="block text-lg font-semibold mb-2">Income:</label>
             <input
               type="number"
               value={taxDetails.income}
               onChange={(e) => setTaxDetails({ ...taxDetails, income: e.target.value })}
-              style={inputStyle}
+              className="p-3 mb-4 border border-gray-300 rounded-lg w-full"
             />
-            <label style={labelStyle}>Deductions:</label>
+            <label className="block text-lg font-semibold mb-2">Deductions:</label>
             <input
               type="number"
               value={taxDetails.deductions}
               onChange={(e) => setTaxDetails({ ...taxDetails, deductions: e.target.value })}
-              style={inputStyle}
+              className="p-3 mb-4 border border-gray-300 rounded-lg w-full"
             />
-            <label style={labelStyle}>Exemptions:</label>
+            <label className="block text-lg font-semibold mb-2">Exemptions:</label>
             <input
               type="number"
               value={taxDetails.exemptions}
               onChange={(e) => setTaxDetails({ ...taxDetails, exemptions: e.target.value })}
-              style={inputStyle}
+              className="p-3 mb-4 border border-gray-300 rounded-lg w-full"
             />
-            <button onClick={handleSubmitTaxCalculation} style={buttonStyle}>Calculate Tax</button>
+            <button onClick={handleSubmitTaxCalculation} className="bg-orange-500 text-white px-6 py-2 rounded-lg">
+              Calculate Tax
+            </button>
           </div>
 
           {taxResult !== null && (
-            <div style={{ marginTop: "20px" }}>
+            <div className="mt-6">
               <h3>Calculated Tax: ₹{taxResult}</h3>
-              <h4>Tax Slab Breakdown:</h4>
-              <table style={{ width: "100%", borderCollapse: "collapse" }}>
+              <h4 className="mt-4">Tax Slab Breakdown:</h4>
+              <table className="w-full table-auto mt-4 border-collapse">
                 <thead>
                   <tr>
-                    <th style={{ border: "1px solid #ddd", padding: "8px" }}>Slab</th>
-                    <th style={{ border: "1px solid #ddd", padding: "8px" }}>Rate</th>
-                    <th style={{ border: "1px solid #ddd", padding: "8px" }}>Amount</th>
+                    <th className="border border-gray-300 p-2">Slab</th>
+                    <th className="border border-gray-300 p-2">Rate</th>
+                    <th className="border border-gray-300 p-2">Amount</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td style={{ border: "1px solid #ddd", padding: "8px" }}>Above ₹1,00,000</td>
-                    <td style={{ border: "1px solid #ddd", padding: "8px" }}>10%</td>
-                    <td style={{ border: "1px solid #ddd", padding: "8px" }}>{taxResult}</td>
+                    <td className="border border-gray-300 p-2">Above ₹1,00,000</td>
+                    <td className="border border-gray-300 p-2">10%</td>
+                    <td className="border border-gray-300 p-2">{taxResult}</td>
                   </tr>
                 </tbody>
               </table>
@@ -262,27 +206,29 @@ const TaxationPage = () => {
 
       {/* Tax Filing Support Tab */}
       {activeTab === "file-upload" && (
-        <section style={tabContentStyle}>
-          <h2 style={{ fontSize: "24px", fontWeight: "700", marginBottom: "24px" }}>Tax Filing Support</h2>
+        <section className="bg-gray-100 p-6 rounded-lg w-full max-w-2xl">
+          <h2 className="text-2xl font-bold mb-6">Tax Filing Support</h2>
           <div>
-            <label style={labelStyle}>Upload Tax Document:</label>
-            <input type="file" onChange={handleFileUpload} style={inputStyle} />
-            <label style={labelStyle}>Document Description:</label>
+            <label className="block text-lg font-semibold mb-2">Upload Tax Document:</label>
+            <input type="file" onChange={handleFileUpload} className="p-3 mb-4 border border-gray-300 rounded-lg w-full" />
+            <label className="block text-lg font-semibold mb-2">Document Description:</label>
             <input
               type="text"
               placeholder="E.g., Form 16"
               onChange={(e) => setFileUpload({ ...fileUpload, description: e.target.value })}
-              style={inputStyle}
+              className="p-3 mb-4 border border-gray-300 rounded-lg w-full"
             />
-            <button onClick={handleSubmitFileUpload} style={buttonStyle}>Upload</button>
+            <button onClick={handleSubmitFileUpload} className="bg-orange-500 text-white px-6 py-2 rounded-lg">
+              Upload
+            </button>
           </div>
 
-          <div style={{ marginTop: "24px" }}>
-            <label style={labelStyle}>Filing Status:</label>
+          <div className="mt-6">
+            <label className="block text-lg font-semibold mb-2">Filing Status:</label>
             <select
               value={filingStatus}
               onChange={handleFilingStatusChange}
-              style={inputStyle}
+              className="p-3 border border-gray-300 rounded-lg w-full"
             >
               <option value="Draft">Draft</option>
               <option value="Submitted">Submitted</option>
@@ -293,25 +239,27 @@ const TaxationPage = () => {
 
       {/* Regulatory Updates Tab */}
       {activeTab === "regulatory-updates" && (
-        <section style={tabContentStyle}>
-          <h2 style={{ fontSize: "24px", fontWeight: "700", marginBottom: "24px" }}>Regulatory Updates</h2>
-          <label style={labelStyle}>Latest Tax Laws:</label>
+        <section className="bg-gray-100 p-6 rounded-lg w-full max-w-2xl">
+          <h2 className="text-2xl font-bold mb-6">Regulatory Updates</h2>
+          <label className="block text-lg font-semibold mb-2">Latest Tax Laws:</label>
           <textarea
             name="updateText"
             value={regulatoryUpdates.updateText}
             onChange={handleRegulatoryUpdatesChange}
             rows="4"
-            style={{ ...inputStyle, height: "120px" }}
+            className="p-3 mb-4 border border-gray-300 rounded-lg w-full"
           />
-          <label style={labelStyle}>Resource Link:</label>
+          <label className="block text-lg font-semibold mb-2">Resource Link:</label>
           <input
             type="url"
             name="resourceLink"
             value={regulatoryUpdates.resourceLink}
             onChange={handleRegulatoryUpdatesChange}
-            style={inputStyle}
+            className="p-3 mb-4 border border-gray-300 rounded-lg w-full"
           />
-          <button onClick={handleSubmitRegulatoryUpdate} style={buttonStyle}>Save Update</button>
+          <button onClick={handleSubmitRegulatoryUpdate} className="bg-orange-500 text-white px-6 py-2 rounded-lg">
+            Save Update
+          </button>
         </section>
       )}
     </div>

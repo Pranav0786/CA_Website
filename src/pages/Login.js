@@ -4,7 +4,6 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import loginImage from "../assets/login.png"; 
-import "./Login.css";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "", role: "CA" });
@@ -35,53 +34,67 @@ const Login = () => {
   };
 
   const handleRegisterClick = () => {
-    navigate("/register"); 
+    navigate("/register");
   };
 
   return (
-    <div className="login-container">
-      <div className="form-container">
-        <form onSubmit={handleSubmit}>
-          <h2>Login</h2>
-          <div className="form-field">
-            <i className="fas fa-envelope"></i>
+    <div className="flex flex-col md:flex-row justify-between items-center h-screen p-5 bg-gradient-to-r from-gray-100 to-indigo-100">
+      <div className="w-full md:w-2/5 bg-white p-8 shadow-lg rounded-lg">
+        <form onSubmit={handleSubmit} className="flex flex-col">
+          <h2 className="mb-5 text-2xl font-bold text-center text-gray-700">Login</h2>
+          <div className="relative mb-5">
+            <i className="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg"></i>
             <input
               type="email"
               name="email"
               placeholder="Email"
               onChange={handleChange}
               required
+              className="w-full pl-12 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
-          <div className="form-field">
-            <i className="fas fa-lock"></i>
+          <div className="relative mb-5">
+            <i className="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg"></i>
             <input
               type="password"
               name="password"
               placeholder="Password"
               onChange={handleChange}
               required
+              className="w-full pl-12 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
-          <div className="form-field">
-            <i className="fas fa-user-tag"></i>
-            <select name="role" onChange={handleChange}>
+          <div className="relative mb-5">
+            <i className="fas fa-user-tag absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg"></i>
+            <select
+              name="role"
+              onChange={handleChange}
+              className="w-full pl-12 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            >
               <option value="CA">CA</option>
               <option value="Businessman">Businessman</option>
             </select>
           </div>
-          <button type="submit">Login</button>
-        <button type="button" onClick={handleRegisterClick} className="register-button">
-          Register
-        </button>
+          <button
+            type="submit"
+            className="w-full py-3 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition duration-300"
+          >
+            Login
+          </button>
+          <button
+            type="button"
+            onClick={handleRegisterClick}
+            className="w-full py-3 mt-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-300"
+          >
+            Register
+          </button>
         </form>
-        
       </div>
-      <div className="image-container">
+      <div className="w-full md:w-2/5 flex justify-center items-center mt-10 md:mt-0">
         <img
-          src={loginImage} 
+          src={loginImage}
           alt="Login"
-          className="ca-image"
+          className="w-full max-w-md rounded-lg shadow-lg"
         />
       </div>
     </div>
