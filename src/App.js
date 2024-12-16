@@ -8,11 +8,15 @@ import Loader from "./pages/Loader";
 import AccountingPage from "./components/CA/AccountingPage"; 
 import TaxationPage from "./components/CA/TaxationPage";
 import AuditPage from "./components/CA/AuditPage";
+import HeroSection from "./components/HomePage/HeroSection";
+import './index.css';
+
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Loader />} />
+        <Route path="/hero" element={<HeroSection />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/ca" element={<CA />} />

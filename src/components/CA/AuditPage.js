@@ -22,11 +22,11 @@ const AuditPage = () => {
     const newTask = {
       description: taskDescription,
       dueDate: taskDueDate,
-      priority: "High", 
+      priority: "High",
     };
     setAuditTasks((prevTasks) => [...prevTasks, newTask]);
-    setTaskDescription(""); 
-    setTaskDueDate(""); 
+    setTaskDescription("");
+    setTaskDueDate("");
 
     try {
       await db.collection("auditTasks").add(newTask);
@@ -50,13 +50,13 @@ const AuditPage = () => {
   const handleAddRisk = async () => {
     const newRisk = {
       description: riskDescription,
-      category: "Financial", 
+      category: "Financial",
       mitigation: riskMitigation,
-      status: "Ongoing", 
+      status: "Ongoing",
     };
     setRiskAssessment((prevRisk) => [...prevRisk, newRisk]);
-    setRiskDescription(""); 
-    setRiskMitigation(""); 
+    setRiskDescription("");
+    setRiskMitigation("");
     try {
       await db.collection("riskAssessments").add(newRisk);
     } catch (error) {
@@ -65,25 +65,25 @@ const AuditPage = () => {
   };
 
   return (
-    <div style={containerStyle}>
-      <Navbar/>
-      <h1 style={headerStyle}>Audit Dashboard</h1>
+    <div className="flex flex-col items-center p-5">
+      <Navbar />
+      <h1 className="text-4xl font-extrabold mb-8">Audit Dashboard</h1>
 
-      <div style={{ marginBottom: "32px" }}>
+      <div className="mb-8">
         <button
-          style={tabButtonStyle(activeTab === "audit-checklist")}
+          className={`px-6 py-3 mx-3 text-lg font-semibold rounded-lg ${activeTab === "audit-checklist" ? "bg-orange-500 text-white" : "bg-gray-300"}`}
           onClick={() => handleChangeTab("audit-checklist")}
         >
           Audit Checklist
         </button>
         <button
-          style={tabButtonStyle(activeTab === "report-templates")}
+          className={`px-6 py-3 mx-3 text-lg font-semibold rounded-lg ${activeTab === "report-templates" ? "bg-orange-500 text-white" : "bg-gray-300"}`}
           onClick={() => handleChangeTab("report-templates")}
         >
           Report Templates
         </button>
         <button
-          style={tabButtonStyle(activeTab === "risk-assessment")}
+          className={`px-6 py-3 mx-3 text-lg font-semibold rounded-lg ${activeTab === "risk-assessment" ? "bg-orange-500 text-white" : "bg-gray-300"}`}
           onClick={() => handleChangeTab("risk-assessment")}
         >
           Risk Assessment
@@ -92,17 +92,17 @@ const AuditPage = () => {
 
       {/* Audit Checklist Tab */}
       {activeTab === "audit-checklist" && (
-        <section style={tabContentStyle}>
-          <h2 style={headerStyle}>Audit Checklist</h2>
-          <div>
+        <section className="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full">
+          <h2 className="text-2xl font-bold mb-6">Audit Checklist</h2>
+          <div className="mb-4">
             <input
               type="text"
               placeholder="Task Description"
               value={taskDescription}
               onChange={(e) => setTaskDescription(e.target.value)}
-              style={inputStyle}
+              className="w-full p-4 border border-gray-300 rounded-lg mb-4"
             />
-            <select style={inputStyle}>
+            <select className="w-full p-4 border border-gray-300 rounded-lg mb-4">
               <option value="High">High</option>
               <option value="Low">Low</option>
             </select>
@@ -110,20 +110,23 @@ const AuditPage = () => {
               type="date"
               value={taskDueDate}
               onChange={(e) => setTaskDueDate(e.target.value)}
-              style={inputStyle}
+              className="w-full p-4 border border-gray-300 rounded-lg mb-4"
             />
-            <button style={buttonStyle} onClick={handleAddTask}>
+            <button
+              className="w-full py-3 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600"
+              onClick={handleAddTask}
+            >
               Add Task
             </button>
           </div>
 
           <div>
-            <h3>Task List</h3>
-            <ul style={{ listStyleType: "none", paddingLeft: "0" }}>
+            <h3 className="text-xl font-semibold mb-4">Task List</h3>
+            <ul className="list-none p-0">
               {auditTasks.map((task, index) => (
-                <li key={index} style={taskItemStyle}>
+                <li key={index} className="p-4 mb-4 border border-gray-300 rounded-lg bg-white">
                   <p>{task.description} - {task.priority} - Due: {task.dueDate}</p>
-                  <div>
+                  <div className="flex gap-4 mt-2">
                     <input type="checkbox" /> Pending
                     <input type="checkbox" /> In-Progress
                     <input type="checkbox" /> Completed
@@ -137,10 +140,10 @@ const AuditPage = () => {
 
       {/* Report Templates Tab */}
       {activeTab === "report-templates" && (
-        <section style={tabContentStyle}>
-          <h2 style={headerStyle}>Report Templates</h2>
-          <div>
-            <select style={inputStyle}>
+        <section className="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full">
+          <h2 className="text-2xl font-bold mb-6">Report Templates</h2>
+          <div className="mb-4">
+            <select className="w-full p-4 border border-gray-300 rounded-lg mb-4">
               <option value="summary-report">Summary Report</option>
               <option value="detailed-report">Detailed Report</option>
             </select>
@@ -149,35 +152,38 @@ const AuditPage = () => {
               placeholder="Report Title"
               value={reportDetails.title}
               onChange={(e) => setReportDetails({ ...reportDetails, title: e.target.value })}
-              style={inputStyle}
+              className="w-full p-4 border border-gray-300 rounded-lg mb-4"
             />
             <textarea
               placeholder="Remarks"
               value={reportDetails.remarks}
               onChange={(e) => setReportDetails({ ...reportDetails, remarks: e.target.value })}
-              style={inputStyle}
+              className="w-full p-4 border border-gray-300 rounded-lg mb-4"
             />
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <div>
-                <label style={labelStyle}>Start Date:</label>
+            <div className="flex gap-4 mb-4">
+              <div className="w-1/2">
+                <label className="block text-lg font-medium mb-2">Start Date:</label>
                 <input
                   type="date"
                   value={reportDetails.startDate}
                   onChange={(e) => setReportDetails({ ...reportDetails, startDate: e.target.value })}
-                  style={inputStyle}
+                  className="w-full p-4 border border-gray-300 rounded-lg"
                 />
               </div>
-              <div>
-                <label style={labelStyle}>End Date:</label>
+              <div className="w-1/2">
+                <label className="block text-lg font-medium mb-2">End Date:</label>
                 <input
                   type="date"
                   value={reportDetails.endDate}
                   onChange={(e) => setReportDetails({ ...reportDetails, endDate: e.target.value })}
-                  style={inputStyle}
+                  className="w-full p-4 border border-gray-300 rounded-lg"
                 />
               </div>
             </div>
-            <button style={buttonStyle} onClick={handleSubmitReport}>
+            <button
+              className="w-full py-3 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600"
+              onClick={handleSubmitReport}
+            >
               Generate Report
             </button>
           </div>
@@ -186,17 +192,17 @@ const AuditPage = () => {
 
       {/* Risk Assessment Tab */}
       {activeTab === "risk-assessment" && (
-        <section style={tabContentStyle}>
-          <h2 style={headerStyle}>Risk Assessment</h2>
-          <div>
+        <section className="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full">
+          <h2 className="text-2xl font-bold mb-6">Risk Assessment</h2>
+          <div className="mb-4">
             <input
               type="text"
               placeholder="Risk Description"
               value={riskDescription}
               onChange={(e) => setRiskDescription(e.target.value)}
-              style={inputStyle}
+              className="w-full p-4 border border-gray-300 rounded-lg mb-4"
             />
-            <select style={inputStyle}>
+            <select className="w-full p-4 border border-gray-300 rounded-lg mb-4">
               <option value="financial">Financial</option>
               <option value="compliance">Compliance</option>
               <option value="operational">Operational</option>
@@ -205,18 +211,21 @@ const AuditPage = () => {
               placeholder="Risk Mitigation Plan"
               value={riskMitigation}
               onChange={(e) => setRiskMitigation(e.target.value)}
-              style={inputStyle}
+              className="w-full p-4 border border-gray-300 rounded-lg mb-4"
             />
-            <button style={buttonStyle} onClick={handleAddRisk}>
+            <button
+              className="w-full py-3 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600"
+              onClick={handleAddRisk}
+            >
               Add Risk
             </button>
           </div>
 
           <div>
-            <h3>Risk List</h3>
-            <ul style={{ listStyleType: "none", paddingLeft: "0" }}>
+            <h3 className="text-xl font-semibold mb-4">Risk List</h3>
+            <ul className="list-none p-0">
               {riskAssessment.map((risk, index) => (
-                <li key={index} style={taskItemStyle}>
+                <li key={index} className="p-4 mb-4 border border-gray-300 rounded-lg bg-white">
                   <p>{risk.description} - {risk.category} - Mitigation: {risk.mitigation}</p>
                 </li>
               ))}
@@ -226,72 +235,6 @@ const AuditPage = () => {
       )}
     </div>
   );
-};
-
-const containerStyle = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  margin: "20px",
-};
-
-const headerStyle = {
-  fontSize: "32px",
-  fontWeight: "bold",
-  marginBottom: "16px",
-};
-
-const tabButtonStyle = (isActive) => ({
-  padding: "10px 20px",
-  margin: "0 10px",
-  backgroundColor: isActive ? "#ff7f50" : "#ccc",
-  color: "white",
-  border: "none",
-  cursor: "pointer",
-  borderRadius: "5px",
-});
-
-const tabContentStyle = {
-  padding: "20px",
-  backgroundColor: "#f9f9f9",
-  borderRadius: "8px",
-  width: "100%",
-  maxWidth: "800px",
-};
-
-const inputStyle = {
-  padding: "10px",
-  fontSize: "16px",
-  margin: "8px 0",
-  width: "100%",
-  maxWidth: "300px",
-  border: "1px solid #ccc",
-  borderRadius: "5px",
-};
-
-const labelStyle = {
-  fontSize: "16px",
-  fontWeight: "600",
-  marginBottom: "8px",
-  display: "block",
-};
-
-const buttonStyle = {
-  padding: "12px 24px",
-  backgroundColor: "#ff7f50",
-  color: "white",
-  border: "none",
-  borderRadius: "5px",
-  cursor: "pointer",
-  marginTop: "12px",
-};
-
-const taskItemStyle = {
-  padding: "12px",
-  marginBottom: "8px",
-  border: "1px solid #ccc",
-  borderRadius: "5px",
-  backgroundColor: "#fff",
 };
 
 export default AuditPage;
