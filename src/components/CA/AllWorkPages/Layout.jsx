@@ -1,15 +1,30 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+// Layout.js
+import React, { useState } from "react";
 import Navbar from "./Navbar";
+import Accounting from "./AccountingPage";
+import Taxation from "./TaxationPage";
+import Audits from "./AuditPage";
 
 const Layout = () => {
+  const [activeComponent, setActiveComponent] = useState("accounting");
+
+  const renderComponent = () => {
+    switch (activeComponent) {
+      case "accounting":
+        return <Accounting />;
+      case "taxation":
+        return <Taxation />;
+      case "audits":
+        return <Audits />;
+      default:
+        return <Accounting />;
+    }
+  };
+
   return (
     <div className="h-screen flex flex-col bg-gray-50 font-sans">
-      <Navbar />
-      {/* Page content changes here */}
-      <div className="flex-1 p-6 overflow-y-auto">
-        <Outlet />
-      </div>
+      <Navbar setActiveComponent={setActiveComponent} />
+      <div className="flex-1 p-6 overflow-y-auto">{renderComponent()}</div>
     </div>
   );
 };
