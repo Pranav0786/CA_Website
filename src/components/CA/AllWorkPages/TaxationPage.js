@@ -123,7 +123,6 @@ const TaxationPage = () => {
 
   return (
     <div className="flex flex-col items-center p-5">
-      <Navbar />
       <h1 className="text-3xl font-bold mb-8">Taxation Dashboard</h1>
 
       {/* Tabs Navigation */}
