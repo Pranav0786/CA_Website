@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { db, storage } from "../../firebase";
+import { db, storage } from "../../../firebase";
 import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

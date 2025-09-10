@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import caImage from "../../assets/ca.png";
-import Navbar from "./Navbar"; // Adjust path as necessary
+import Navbar from "./AllWorkPages/Navbar"; // Adjust path as necessary
 
 const CA = () => {
   return (
