@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
-import Register from "./pages/Register";
-import Login from "./pages/Login";
+import Register from "./pages/AuthPages/Register";
+import Login from "./pages/AuthPages/Login";
 import CA from './components/CA/CA';
 import Businessman from "./components/Businessman/Businessman";
 import Loader from "./pages/Loader";
