@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { db } from "../../firebase";
+import { db } from "../../../firebase";
 import Navbar from "./Navbar";
 
 const AuditPage = () => {
@@ -66,7 +66,6 @@ const AuditPage = () => {
 
   return (
     <div className="flex flex-col items-center p-5">
-      <Navbar />
       <h1 className="text-4xl font-extrabold mb-8">Audit Dashboard</h1>
 
       <div className="mb-8">

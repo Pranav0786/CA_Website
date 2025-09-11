@@ -1,31 +1,41 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
+import './index.css';
+import Register from "./pages/AuthPages/Register";
+import Login from "./pages/AuthPages/Login";
 import CA from './components/CA/CA';
 import Businessman from "./components/Businessman/Businessman";
 import Loader from "./pages/Loader";
-import AccountingPage from "./components/CA/AccountingPage"; 
-import TaxationPage from "./components/CA/TaxationPage";
-import AuditPage from "./components/CA/AuditPage";
+import AccountingPage from "./components/CA/AllWorkPages/AccountingPage";
+import TaxationPage from "./components/CA/AllWorkPages/TaxationPage";
+import AuditPage from "./components/CA/AllWorkPages/AuditPage";
 import HeroSection from "./components/HomePage/HeroSection";
-import './index.css';
+import Layout from "./components/CA/AllWorkPages/Layout";
+import ProtectedRoute from "./pages/ProtectedRotes/ProtectedRoute";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Common Routes */}
         <Route path="/" element={<Loader />} />
         <Route path="/hero" element={<HeroSection />} />
+
+        {/* Open Routes */}
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/ca" element={<CA />} />
-        <Route path="/businessman" element={<Businessman />} />
-        <Route path="/accounting" element={<AccountingPage />} /> 
-        <Route path="/taxation" element={<TaxationPage />} />
-        <Route path="/audits" element={<AuditPage />} />
 
+        {/* Protected CA Routes */}
+        <Route path="/ca" element={<ProtectedRoute allowedRole="CA"><CA /></ProtectedRoute>} />
+        <Route path="/layout" element={<ProtectedRoute allowedRole="CA"><Layout /></ProtectedRoute>} />
+        <Route path="/accounting" element={<ProtectedRoute allowedRole="CA"><AccountingPage /></ProtectedRoute>} />
+        <Route path="/taxation" element={<ProtectedRoute allowedRole="CA"><TaxationPage /></ProtectedRoute>} />
+        <Route path="/audits" element={<ProtectedRoute allowedRole="CA"><AuditPage /></ProtectedRoute>} />
+
+        {/* Protected Businessman Routes */}
+        <Route path="/businessman" element={<ProtectedRoute allowedRole="Businessman"><Businessman /></ProtectedRoute>} />
       </Routes>
+
     </BrowserRouter>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { db, storage } from "../../firebase";
+import { db, storage } from "../../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection, addDoc } from "firebase/firestore";
 import Navbar from "./Navbar";
@@ -123,7 +123,6 @@ const TaxationPage = () => {
 
   return (
     <div className="flex flex-col items-center p-5">
-      <Navbar />
       <h1 className="text-3xl font-bold mb-8">Taxation Dashboard</h1>
 
       {/* Tabs Navigation */}

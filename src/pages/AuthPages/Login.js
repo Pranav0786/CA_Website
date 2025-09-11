@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { auth, db } from "../firebase";
+import { auth, db } from "../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import loginImage from "../assets/login.png"; 
+import loginImage from "../../assets/login.png";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "", role: "CA" });
   const navigate = useNavigate();
-
+  
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -24,7 +24,9 @@ const Login = () => {
       const userDoc = await getDoc(doc(db, collectionName, user.uid));
 
       if (userDoc.exists()) {
-        navigate(role === "CA" ? "/ca" : "/businessman");
+        localStorage.setItem("isAuthenticated", "true");
+        localStorage.setItem("role", role);  // 🔹 store role
+        navigate(role === "CA" ? "/layout" : "/businessman");
       } else {
         alert("No user found with the selected role.");
       }
