@@ -1,12 +1,13 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import caImage from "../../assets/ca.png";
-import Navbar from "./AllWorkPages/Navbar"; // Adjust path as necessary
+import caImage from "../../../assets/ca.png";
 
-const CA = () => {
+const Dashboard = () => {
   return (
-    <div className="h-screen flex flex-col bg-gray-50 font-sans">
-      <Navbar /> 
+    <div className="text-center">
+      <h1 className="text-3xl font-bold text-gray-800 mb-4">Dashboard</h1>
+      <p className="text-lg text-gray-600">
+        Welcome to your CA Hub! Here you can manage Accounting, Taxation, and Audits efficiently.
+      </p>
       <div className="flex flex-col lg:flex-row justify-between items-center p-10">
         <div className="w-full lg:w-3/4 text-center lg:text-left">
           <h1 className="text-4xl font-extrabold text-gray-800 mb-4">
@@ -31,4 +32,4 @@ const CA = () => {
   );
 };
 
-export default CA;
+export default Dashboard;
