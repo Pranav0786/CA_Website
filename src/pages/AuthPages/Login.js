@@ -41,7 +41,7 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center min-h-screen p-8 bg-gradient-to-r from-[#0f1f2f] via-[#091921] to-[#0f1f2f]">
       {/* Glass Card */}
-      <div className="w-full max-w-md bg-black/30 backdrop-blur-2xl p-10 shadow-[0_0_40px_rgba(168,85,247,0.4)] rounded-2xl border border-purple-400/40 animate-fadeIn transform transition hover:scale-[1.02] hover:shadow-[0_0_60px_rgba(168,85,247,0.6)]">
+      <div className="w-full max-w-md bg-black/30 backdrop-blur-2xl p-10 shadow-[0_0_40px_rgba(168,85,247,0.4)] rounded-2xl border border-purple-400/40 animate-fadeIn transform transition  hover:shadow-[0_0_60px_rgba(168,85,247,0.6)]">
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           <h2 className="text-4xl font-extrabold text-center text-white drop-shadow-lg mb-6 tracking-wide">
             Welcome Back
