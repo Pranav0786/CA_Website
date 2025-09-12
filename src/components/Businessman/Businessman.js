@@ -24,7 +24,7 @@ const Businessman = () => {
       <div className="flex flex-col lg:flex-row justify-between items-center p-10 space-y-8 lg:space-y-0">
         <div className="w-full lg:w-1/2 text-center lg:text-left px-4">
           <h1 className="text-4xl font-extrabold text-gray-800 mb-4">
-            Welcome to World of CA HUB
+            Welcome to World of Business HUB
           </h1>
           <p className="text-lg text-gray-600 leading-relaxed">
             <b>Enhance your business efficiency with our analytics, client management, and documentation tools.</b>
