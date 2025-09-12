@@ -25,7 +25,8 @@ import hero5 from "../assets/image5.png";
 import hero6 from "../assets/image6.png";
 
 import { FaArrowUp } from "react-icons/fa";  // ✅ only keep this
-import lineChartVideo from '../assets/Animated-Line-Chart_-Purple.mp4';
+import lineChartVideo from '../assets/0_Financial_Data_Stock_Market_3840x2160.mp4';
+import businessVideo from "../assets/573278_Business_Stock_3840x2160.mp4";
 
 const Home = () => {
   const services = [
@@ -74,13 +75,26 @@ const Home = () => {
     <div className="w-full text-white font-sans relative scroll-smooth">
       {/* Navbar */}
       <Navbar />
+<section
+  id="hero"
+  className="relative min-h-screen flex flex-col justify-center items-center px-6 text-white overflow-hidden pt-24"
+>
+  {/* Background Video */}
+  <video
+    src={lineChartVideo}
+    autoPlay
+    loop
+    muted
+    playsInline
+    className="absolute inset-0 w-full h-full object-cover z-0"
+  />
 
-<section  id="hero" className="relative min-h-screen flex flex-col justify-center items-center px-6 text-white overflow-hidden bg-animated">
-  {/* Dark overlay for readability */}
-  <div className="absolute inset-0 bg-black/60"></div>
+  {/* Dark overlay */}
+  <div className="absolute inset-0 bg-black/60 z-10"></div>
 
   {/* Content Grid (2 columns) */}
-  <div className="relative z-10 max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+  <div className="relative z-20 max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+    
     {/* Left Content */}
     <div className="flex flex-col items-start space-y-6">
       <motion.h1
@@ -112,113 +126,72 @@ const Home = () => {
         </button>
       </div>
     </div>
-
-    {/* Right Side Animated Video */}
-    {/* <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1 }}
-      className="flex justify-center"
-    >
-      <video
-        src={lineChartVideo}
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="w-80 h-80 rounded-2xl shadow-2xl object-cover"
-      />
-    </motion.div> */}
-  </div> 
-
-  {/* Stats Section */}
-  <div className="mt-16 w-full max-w-5xl grid md:grid-cols-4 gap-6 text-center relative z-10">
-    <div>
-      <p className="text-blue-400 text-xl font-bold">100M</p>
-      <p className="text-gray-300">Total Supply</p>
-    </div>
-    <div>
-      <p className="text-pink-400 text-xl font-bold">16M</p>
-      <p className="text-gray-300">Pre-ICO</p>
-    </div>
-    <div>
-      <p className="text-red-400 text-xl font-bold">64%</p>
-      <p className="text-gray-300">Token Sale</p>
-    </div>
-    <div>
-      <p className="text-cyan-400 text-xl font-bold">37.24%</p>
-      <p className="text-gray-300">Hidden Cap</p>
-    </div>
-  </div>
-
-  {/* Progress Bars */}
-  <div className="mt-10 w-full max-w-5xl space-y-6 relative z-10">
-    {/* One Day */}
-    <div>
-      <p className="text-gray-300 mb-2">One Day</p>
-      <div className="w-full h-2 bg-gray-700 rounded-full overflow-hidden">
-        <motion.div
-          initial={{ width: 0 }}
-          whileInView={{ width: "50%" }}
-          transition={{ duration: 1.5 }}
-          className="h-2 bg-pink-500 rounded-full"
-        />
-      </div>
-    </div>
-
-    {/* One Week */}
-    <div>
-      <p className="text-gray-300 mb-2">One Week</p>
-      <div className="w-full h-2 bg-gray-700 rounded-full overflow-hidden">
-        <motion.div
-          initial={{ width: 0 }}
-          whileInView={{ width: "75%" }}
-          transition={{ duration: 1.5 }}
-          className="h-2 bg-cyan-400 rounded-full"
-        />
-      </div>
-    </div>
   </div>
 </section>
 
+
+
+{/* About Section */}
 {/* About Section */}
 <section
   id="about"
-  className="relative flex flex-col items-center justify-center px-6 py-16 text-center 
-  border-2 border-transparent rounded-3xl
+  className="relative px-6 py-16 border-2 border-transparent rounded-3xl
   before:absolute before:inset-0 before:rounded-3xl 
   before:border-2 before:border-cyan-400 
   before:shadow-[0_0_25px_rgba(34,211,238,0.9),0_0_50px_rgba(34,211,238,0.6)] 
   before:animate-pulse before:pointer-events-none"
 >
   <div className="absolute inset-0 bg-black/60 backdrop-blur-md rounded-3xl"></div>
-  <motion.h2
-    initial={{ opacity: 0, y: 40 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8 }}
-    className="text-2xl md:text-3xl font-bold text-cyan-400 mb-6 relative z-10"
-  >
-    About Us
-  </motion.h2>
 
-  <motion.p
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 1 }}
-    className="text-lg text-gray-200 max-w-4xl leading-relaxed relative z-10"
-  >
-    At <span className="text-cyan-400 font-semibold">CA Portal</span>, we combine 
-    <span className="text-yellow-400"> financial expertise</span> with 
-    <span className="text-pink-400"> modern technology</span> to deliver seamless 
-    accounting, taxation, and audit solutions.  
-    <br className="hidden md:block" />
-    Our mission is to simplify complex financial processes, empower businesses with 
-    real-time insights, and ensure <span className="text-cyan-300">complete transparency</span> 
-    in every transaction.
-  </motion.p>
+  <div className="relative z-10 max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+    {/* Left Content */}
+    <div className="text-center md:text-left space-y-6">
+      <motion.h2
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-2xl md:text-3xl font-bold text-cyan-400"
+      >
+        About Us
+      </motion.h2>
 
-  {/* Decorative Line / Divider */}
-  <div className="mt-8 w-32 h-[2px] bg-gradient-to-r from-cyan-400 via-blue-500 to-pink-500 rounded-full"></div>
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="text-lg text-gray-200 max-w-4xl leading-relaxed"
+      >
+        At <span className="text-cyan-400 font-semibold">CA Portal</span>, we combine 
+        <span className="text-yellow-400"> financial expertise</span> with 
+        <span className="text-pink-400"> modern technology</span> to deliver seamless 
+        accounting, taxation, and audit solutions.  
+        <br className="hidden md:block" />
+        Our mission is to simplify complex financial processes, empower businesses with 
+        real-time insights, and ensure <span className="text-cyan-300">complete transparency</span> 
+        in every transaction.
+      </motion.p>
+
+      {/* Decorative Line */}
+      <div className="mt-6 w-32 h-[2px] bg-gradient-to-r from-cyan-400 via-blue-500 to-pink-500 rounded-full"></div>
+    </div>
+
+    {/* Right Side Video */}
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1 }}
+      className="flex justify-center md:justify-end"
+    >
+      <video
+        src={businessVideo}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="w-full max-w-md md:max-w-lg lg:max-w-xl rounded-3xl shadow-2xl object-cover"
+      />
+    </motion.div>
+  </div>
 </section>
 
 
