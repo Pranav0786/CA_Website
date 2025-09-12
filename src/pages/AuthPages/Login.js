@@ -3,12 +3,11 @@ import { auth, db } from "../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import loginImage from "../../assets/login.png";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "", role: "CA" });
   const navigate = useNavigate();
-  
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -25,7 +24,7 @@ const Login = () => {
 
       if (userDoc.exists()) {
         localStorage.setItem("isAuthenticated", "true");
-        localStorage.setItem("role", role);  // 🔹 store role
+        localStorage.setItem("role", role);
         navigate(role === "CA" ? "/layout" : "/businessman");
       } else {
         alert("No user found with the selected role.");
@@ -40,64 +39,64 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row justify-between items-center h-screen p-5 bg-gradient-to-r from-gray-100 to-indigo-100">
-      <div className="w-full md:w-2/5 bg-white p-8 shadow-lg rounded-lg">
-        <form onSubmit={handleSubmit} className="flex flex-col">
-          <h2 className="mb-5 text-2xl font-bold text-center text-gray-700">Login</h2>
-          <div className="relative mb-5">
-            <i className="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg"></i>
+    <div className="flex items-center justify-center min-h-screen p-8 bg-gradient-to-r from-[#0f1f2f] via-[#091921] to-[#0f1f2f]">
+      <div className="w-full max-w-md bg-black/40 backdrop-blur-xl p-8 shadow-2xl rounded-2xl border border-purple-500/60 animate-fadeIn">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+          <h2 className="text-3xl font-bold text-center text-white drop-shadow-md mb-8">
+            Welcome Back
+          </h2>
+
+          <div className="relative">
+            <i className="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-300 text-lg"></i>
             <input
               type="email"
               name="email"
               placeholder="Email"
               onChange={handleChange}
               required
-              className="w-full pl-12 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full pl-12 py-3 border border-purple-500/40 rounded-lg bg-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-400 transition"
             />
           </div>
-          <div className="relative mb-5">
-            <i className="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg"></i>
+
+          <div className="relative">
+            <i className="fas fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-300 text-lg"></i>
             <input
               type="password"
               name="password"
               placeholder="Password"
               onChange={handleChange}
               required
-              className="w-full pl-12 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full pl-12 py-3 border border-purple-500/40 rounded-lg bg-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-400 transition"
             />
           </div>
-          <div className="relative mb-5">
-            <i className="fas fa-user-tag absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg"></i>
+
+          <div className="relative">
+            <i className="fas fa-user-tag absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-300 text-lg"></i>
             <select
               name="role"
               onChange={handleChange}
-              className="w-full pl-12 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full pl-12 py-3 border border-purple-500/40 rounded-lg bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-400 transition"
             >
-              <option value="CA">CA</option>
-              <option value="Businessman">Businessman</option>
+              <option value="CA" className="text-black">CA</option>
+              <option value="Businessman" className="text-black">Businessman</option>
             </select>
           </div>
+
           <button
             type="submit"
-            className="w-full py-3 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition duration-300"
+            className="py-3 bg-purple-600/80 text-white font-semibold rounded-lg hover:bg-purple-700 transition duration-300 shadow-md"
           >
             Login
           </button>
+
           <button
             type="button"
             onClick={handleRegisterClick}
-            className="w-full py-3 mt-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-300"
+            className="py-3 bg-white/20 text-white font-semibold rounded-lg hover:bg-white/30 transition duration-300 shadow-md"
           >
             Register
           </button>
         </form>
-      </div>
-      <div className="w-full md:w-2/5 flex justify-center items-center mt-10 md:mt-0">
-        <img
-          src={loginImage}
-          alt="Login"
-          className="w-full max-w-md rounded-lg shadow-lg"
-        />
       </div>
     </div>
   );
