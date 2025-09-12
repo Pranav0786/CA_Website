@@ -90,41 +90,45 @@ const Home = () => {
   />
 
   {/* Dark overlay */}
+
+   {/* Dark overlay */}
   <div className="absolute inset-0 bg-black/60 z-10"></div>
 
-  {/* Content Grid (2 columns) */}
-  <div className="relative z-20 max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-    
-    {/* Left Content */}
-    <div className="flex flex-col items-start space-y-6">
-      <motion.h1
-        initial={{ opacity: 0, y: -40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.1 }}
-        className="text-3xl md:text-3xl font-bold leading-tight"
-      >
-        The Future of Money, <br />
-        <span className="text-cyan-400">Wrapped in Security</span>
-      </motion.h1>
+  {/* Centered Content */}
+  <div className="relative z-20 max-w-4xl mx-auto flex flex-col items-center space-y-6">
+    <motion.h1
+      initial={{ opacity: 0, y: -40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="text-4xl md:text-5xl font-extrabold leading-tight"
+    >
+      Welcome to <span className="text-cyan-400">CA Hub</span>
+    </motion.h1>
 
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="text-gray-200 text-sm md:text-xl max-w-lg"
-      >
-        ApexPay blends real-time market insights with military-grade
-        security — so you can trade, track, and spend with total confidence.
-      </motion.p>
+    <motion.p
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+      className="text-gray-200 text-lg md:text-xl leading-relaxed"
+    >
+      Your one-stop platform for{" "}
+      <span className="text-yellow-400 font-semibold">Accounting</span>,{" "}
+      <span className="text-pink-400 font-semibold">Taxation</span>,{" "}
+      <span className="text-cyan-300 font-semibold">Audit</span>, and{" "}
+      <span className="text-green-400 font-semibold">Business Advisory</span>.
+      <br className="hidden md:block" />
+      At CA Hub, we blend financial expertise with modern technology to simplify
+      complex processes, ensure compliance, and empower businesses with
+      real-time insights.
+    </motion.p>
 
-      <div className="flex space-x-4">
-        <button className="px-6 py-3 bg-cyan-400 hover:bg-cyan-500 text-black font-semibold rounded-lg transition">
-          Get Started
-        </button>
-        <button className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg transition">
-          Talk to Human
-        </button>
-      </div>
+    <div className="flex space-x-4 pt-4">
+      <button className="px-6 py-3 bg-cyan-400 hover:bg-cyan-500 text-black font-semibold rounded-lg transition">
+        Explore Services
+      </button>
+      <button className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg transition">
+        Contact Us
+      </button>
     </div>
   </div>
 </section>

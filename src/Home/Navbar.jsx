@@ -28,7 +28,7 @@ const Navbar = () => {
             <img src={caLogo} alt="CA Logo" className="w-full h-full object-cover" />
           </div>
           <span className="text-2xl font-extrabold text-white tracking-wide">
-            CA Portal
+            CA Hub
           </span>
         </div>
 
