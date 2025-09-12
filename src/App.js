@@ -5,7 +5,7 @@ import Register from "./pages/AuthPages/Register";
 import Login from "./pages/AuthPages/Login";
 import CA from './components/CA/CA';
 import Businessman from "./components/Businessman/Businessman";
-import Loader from "./pages/Loader";
+//import Loader from "./pages/Loader";
 import AccountingPage from "./components/CA/AllWorkPages/AccountingPage";
 import TaxationPage from "./components/CA/AllWorkPages/TaxationPage";
 import AuditPage from "./components/CA/AllWorkPages/AuditPage";
@@ -18,7 +18,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         {/* Common Routes */}
-        <Route path="/" element={<Loader />} />
+        {/*<Route path="/" element={<Loader />} />*/}
         <Route path="/hero" element={<HeroSection />} />
 
         {/* Open Routes */}
@@ -34,6 +34,7 @@ const App = () => {
 
         {/* Protected Businessman Routes */}
         <Route path="/businessman" element={<ProtectedRoute allowedRole="Businessman"><Businessman /></ProtectedRoute>} />
+
       </Routes>
 
     </BrowserRouter>
