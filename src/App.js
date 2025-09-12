@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
+import Home from "./Home/HomePage.js";
 import Register from "./pages/AuthPages/Register";
 import Login from "./pages/AuthPages/Login";
 import Clock from "./components/Common/Clock.tsx";
@@ -19,7 +20,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         {/* Common Routes */}
-        {/*<Route path="/" element={<Loader />} />*/}
+        <Route path="/" element={<Home />} />
         <Route path="/hero" element={<HeroSection />} />
         <Route path="/" element={<Clock />} />
 
