@@ -71,6 +71,26 @@ const Home = () => {
     return () => clearInterval(counter);
   }, []);
 
+  // Rotating Quotes
+const quotes = [
+  "A good accountant is a business’s best investment.",
+  "Behind every successful business is a great CA.",
+  "Finance is the art of passing money from hand to hand until it finally disappears.",
+  "Accounting is the language of business.",
+  "In the world of business, trust is built on transparency and numbers."
+];
+
+const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
+const currentQuote = quotes[currentQuoteIndex];
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % quotes.length);
+  }, 3000); // 3 seconds
+  return () => clearInterval(interval);
+}, [quotes.length]);
+
+
   return (
     <div className="w-full text-white font-sans relative scroll-smooth">
       {/* Navbar */}
@@ -95,42 +115,57 @@ const Home = () => {
   <div className="absolute inset-0 bg-black/60 z-10"></div>
 
   {/* Centered Content */}
-  <div className="relative z-20 max-w-4xl mx-auto flex flex-col items-center space-y-6">
-    <motion.h1
-      initial={{ opacity: 0, y: -40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="text-4xl md:text-5xl font-extrabold leading-tight"
-    >
-      Welcome to <span className="text-cyan-400">CA Hub</span>
-    </motion.h1>
+<div className="relative z-20 max-w-4xl mx-auto flex flex-col items-center space-y-6">
+  <motion.h1
+    initial={{ opacity: 0, y: -40 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="text-4xl md:text-5xl font-extrabold leading-tight"
+  >
+    Welcome to <span className="text-cyan-400">CA Hub</span>
+  </motion.h1>
 
-    <motion.p
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1 }}
-      className="text-gray-200 text-lg md:text-xl leading-relaxed"
-    >
-      Your one-stop platform for{" "}
-      <span className="text-yellow-400 font-semibold">Accounting</span>,{" "}
-      <span className="text-pink-400 font-semibold">Taxation</span>,{" "}
-      <span className="text-cyan-300 font-semibold">Audit</span>, and{" "}
-      <span className="text-green-400 font-semibold">Business Advisory</span>.
-      <br className="hidden md:block" />
-      At CA Hub, we blend financial expertise with modern technology to simplify
-      complex processes, ensure compliance, and empower businesses with
-      real-time insights.
-    </motion.p>
+    {/* ✅ Rotating Quotes */}
+  <motion.p
+    key={currentQuote} // ensures animation runs when quote changes
+    initial={{ opacity: 0, y: 10 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -10 }}
+    transition={{ duration: 0.8 }}
+    className="italic bold text-lg text-red-500 text-center max-w-2xl"
+  >
+    "{currentQuote}"
+  </motion.p>
 
-    <div className="flex space-x-4 pt-4">
-      <button className="px-6 py-3 bg-cyan-400 hover:bg-cyan-500 text-black font-semibold rounded-lg transition">
-        Explore Services
-      </button>
-      <button className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg transition">
-        Contact Us
-      </button>
-    </div>
+  <motion.p
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1 }}
+    className="text-gray-200 text-lg md:text-xl leading-relaxed"
+  >
+    Your one-stop platform for{" "}
+    <span className="text-yellow-400 font-semibold">Accounting</span>,{" "}
+    <span className="text-pink-400 font-semibold">Taxation</span>,{" "}
+    <span className="text-cyan-300 font-semibold">Audit</span>, and{" "}
+    <span className="text-green-400 font-semibold">Business Advisory</span>.
+    <br className="hidden md:block" />
+    At CA Hub, we blend financial expertise with modern technology to simplify
+    complex processes, ensure compliance, and empower businesses with
+    real-time insights.
+  </motion.p>
+
+
+
+  <div className="flex space-x-4 pt-4">
+    <button className="px-6 py-3 bg-cyan-400 hover:bg-cyan-500 text-black font-semibold rounded-lg transition">
+      Explore Services
+    </button>
+    <button className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg transition">
+      Contact Us
+    </button>
   </div>
+</div>
+
 </section>
 
 
