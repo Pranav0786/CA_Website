@@ -4,7 +4,6 @@ import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileUpload, faFileInvoice, faCalendar, faDollarSign, faStickyNote, faUsers, faEnvelope, faPhoneAlt, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
-import Navbar from "./Navbar";
 
 const AccountingPage = () => {
   const [activeTab, setActiveTab] = useState("data-entry");
