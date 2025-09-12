@@ -8,7 +8,7 @@ const HeroSection = () => {
 
       {/* Main Content */}
       <div className="relative z-10 text-center mt-20">
-        <h1 className="text-5xl md:text-6xl font-bold leading-tight">
+        <h1 className="text-2xl md:text-2xl font-bold leading-tight">
           The world of finance
         </h1>
         <h2 className="text-3xl md:text-4xl font-semibold text-gray-400 mt-4">

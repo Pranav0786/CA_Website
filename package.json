@@ -19,6 +19,9 @@
     "react-icons": "^5.5.0",
     "react-router-dom": "^6.28.0",
     "react-scripts": "^5.0.1",
+    "react-scroll": "^1.9.3",
+    "react-tsparticles": "^2.12.2",
+    "tsparticles": "^3.9.1",
     "vanilla-tilt": "^1.8.1",
     "web-vitals": "^4.2.4"
   },

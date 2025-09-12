@@ -25,7 +25,7 @@ import hero5 from "../assets/image5.png";
 import hero6 from "../assets/image6.png";
 
 import { FaArrowUp } from "react-icons/fa";  // ✅ only keep this
-
+import lineChartVideo from '../assets/Animated-Line-Chart_-Purple.mp4';
 
 const Home = () => {
   const services = [
@@ -75,15 +75,19 @@ const Home = () => {
       {/* Navbar */}
       <Navbar />
 
- <section className="relative min-h-screen flex flex-col justify-center items-center px-6 bg-[#0d0d16] text-white">
-  <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+<section  id="hero" className="relative min-h-screen flex flex-col justify-center items-center px-6 text-white overflow-hidden bg-animated">
+  {/* Dark overlay for readability */}
+  <div className="absolute inset-0 bg-black/60"></div>
+
+  {/* Content Grid (2 columns) */}
+  <div className="relative z-10 max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
     {/* Left Content */}
     <div className="flex flex-col items-start space-y-6">
       <motion.h1
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-4xl md:text-6xl font-bold leading-tight"
+        transition={{ duration: 0.1 }}
+        className="text-3xl md:text-3xl font-bold leading-tight"
       >
         The Future of Money, <br />
         <span className="text-cyan-400">Wrapped in Security</span>
@@ -93,7 +97,7 @@ const Home = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        className="text-gray-300 text-lg md:text-xl max-w-xl"
+        className="text-gray-200 text-sm md:text-xl max-w-lg"
       >
         ApexPay blends real-time market insights with military-grade
         security — so you can trade, track, and spend with total confidence.
@@ -109,66 +113,114 @@ const Home = () => {
       </div>
     </div>
 
-    {/* Right Side Graphic */}
-    <motion.div
+    {/* Right Side Animated Video */}
+    {/* <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1 }}
       className="flex justify-center"
     >
-      <div className="w-60 h-60 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-2xl shadow-2xl relative flex flex-col items-center justify-center text-black">
-        <FaArrowUp className="text-3xl text-white" />
-        <p className="text-3xl font-bold text-white mt-2">
-          +{percentage}%
-        </p>
-      </div>
-    </motion.div>
-  </div>
+      <video
+        src={lineChartVideo}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="w-80 h-80 rounded-2xl shadow-2xl object-cover"
+      />
+    </motion.div> */}
+  </div> 
 
   {/* Stats Section */}
-  <div className="mt-16 w-full max-w-5xl grid md:grid-cols-4 gap-6 text-center">
+  <div className="mt-16 w-full max-w-5xl grid md:grid-cols-4 gap-6 text-center relative z-10">
     <div>
-      <p className="text-blue-400 text-2xl font-bold">100M</p>
-      <p className="text-gray-400">Total Supply</p>
+      <p className="text-blue-400 text-xl font-bold">100M</p>
+      <p className="text-gray-300">Total Supply</p>
     </div>
     <div>
-      <p className="text-pink-400 text-2xl font-bold">16M</p>
-      <p className="text-gray-400">Pre-ICO</p>
+      <p className="text-pink-400 text-xl font-bold">16M</p>
+      <p className="text-gray-300">Pre-ICO</p>
     </div>
     <div>
-      <p className="text-red-400 text-2xl font-bold">64%</p>
-      <p className="text-gray-400">Token Sale</p>
+      <p className="text-red-400 text-xl font-bold">64%</p>
+      <p className="text-gray-300">Token Sale</p>
     </div>
     <div>
-      <p className="text-cyan-400 text-2xl font-bold">37.24%</p>
-      <p className="text-gray-400">Hidden Cap</p>
+      <p className="text-cyan-400 text-xl font-bold">37.24%</p>
+      <p className="text-gray-300">Hidden Cap</p>
     </div>
   </div>
 
   {/* Progress Bars */}
-  <div className="mt-10 w-full max-w-5xl space-y-4">
+  <div className="mt-10 w-full max-w-5xl space-y-6 relative z-10">
+    {/* One Day */}
     <div>
-      <p className="text-gray-400 mb-1">One Day</p>
-      <motion.div
-        initial={{ width: 0 }}
-        whileInView={{ width: "50%" }}
-        transition={{ duration: 1.5 }}
-        className="h-2 bg-pink-500 rounded-full"
-      />
-      <div className="w-full h-2 bg-gray-700 rounded-full absolute -z-10"></div>
+      <p className="text-gray-300 mb-2">One Day</p>
+      <div className="w-full h-2 bg-gray-700 rounded-full overflow-hidden">
+        <motion.div
+          initial={{ width: 0 }}
+          whileInView={{ width: "50%" }}
+          transition={{ duration: 1.5 }}
+          className="h-2 bg-pink-500 rounded-full"
+        />
+      </div>
     </div>
+
+    {/* One Week */}
     <div>
-      <p className="text-gray-400 mb-1">One Week</p>
-      <motion.div
-        initial={{ width: 0 }}
-        whileInView={{ width: "75%" }}
-        transition={{ duration: 1.5 }}
-        className="h-2 bg-cyan-400 rounded-full"
-      />
-      <div className="w-full h-2 bg-gray-700 rounded-full absolute -z-10"></div>
+      <p className="text-gray-300 mb-2">One Week</p>
+      <div className="w-full h-2 bg-gray-700 rounded-full overflow-hidden">
+        <motion.div
+          initial={{ width: 0 }}
+          whileInView={{ width: "75%" }}
+          transition={{ duration: 1.5 }}
+          className="h-2 bg-cyan-400 rounded-full"
+        />
+      </div>
     </div>
   </div>
 </section>
+
+{/* About Section */}
+<section
+  id="about"
+  className="relative flex flex-col items-center justify-center px-6 py-16 text-center 
+  border-2 border-transparent rounded-3xl
+  before:absolute before:inset-0 before:rounded-3xl 
+  before:border-2 before:border-cyan-400 
+  before:shadow-[0_0_25px_rgba(34,211,238,0.9),0_0_50px_rgba(34,211,238,0.6)] 
+  before:animate-pulse before:pointer-events-none"
+>
+  <div className="absolute inset-0 bg-black/60 backdrop-blur-md rounded-3xl"></div>
+  <motion.h2
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+    className="text-2xl md:text-3xl font-bold text-cyan-400 mb-6 relative z-10"
+  >
+    About Us
+  </motion.h2>
+
+  <motion.p
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1 }}
+    className="text-lg text-gray-200 max-w-4xl leading-relaxed relative z-10"
+  >
+    At <span className="text-cyan-400 font-semibold">CA Portal</span>, we combine 
+    <span className="text-yellow-400"> financial expertise</span> with 
+    <span className="text-pink-400"> modern technology</span> to deliver seamless 
+    accounting, taxation, and audit solutions.  
+    <br className="hidden md:block" />
+    Our mission is to simplify complex financial processes, empower businesses with 
+    real-time insights, and ensure <span className="text-cyan-300">complete transparency</span> 
+    in every transaction.
+  </motion.p>
+
+  {/* Decorative Line / Divider */}
+  <div className="mt-8 w-32 h-[2px] bg-gradient-to-r from-cyan-400 via-blue-500 to-pink-500 rounded-full"></div>
+</section>
+
 
       {/* Services Section */}
       <section
@@ -184,7 +236,7 @@ const Home = () => {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl md:text-5xl font-bold text-cyan-400 mb-10 relative z-10"
+          className="text-2xl md:text-3xl font-bold text-cyan-400 mb-10 relative z-10"
         >
           Our Services
         </motion.h2>
@@ -201,14 +253,14 @@ const Home = () => {
               <img
                 src={service.img}
                 alt={service.title}
-                className="w-full h-full object-cover rounded-2xl transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover rounded-xl transition-transform duration-700 group-hover:scale-110"
               />
 
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 via-black/30 to-cyan-500/20 
               opacity-0 group-hover:opacity-100 transition duration-500"></div>
 
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500">
-                <h3 className="text-2xl font-extrabold text-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.9)] group-hover:animate-pulse">
+                <h3 className="text-2xl font-extrabold text-yellow-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.9)] group-hover:animate-pulse">
                   {service.title}
                 </h3>
               </div>
@@ -239,11 +291,11 @@ const Home = () => {
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-4xl md:text-5xl font-bold text-cyan-400 mb-4"
+        className="text-2xl md:text-3xl font-bold text-cyan-400 mb-15"
       >
         Contact Us
       </motion.h2>
-      <p className="text-lg text-gray-200 max-w-md">
+      <p className="text-lg text-gray-200 max-w-lg">
         Stay connected with us through our social platforms or drop us a
         message. We’d love to hear from you!
       </p>
