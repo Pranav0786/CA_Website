@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
 import Register from "./pages/AuthPages/Register";
 import Login from "./pages/AuthPages/Login";
+import Clock from "./components/Common/Clock.tsx";
 import CA from './components/CA/CA';
 import Businessman from "./components/Businessman/Businessman";
 //import Loader from "./pages/Loader";
@@ -20,6 +21,7 @@ const App = () => {
         {/* Common Routes */}
         {/*<Route path="/" element={<Loader />} />*/}
         <Route path="/hero" element={<HeroSection />} />
+        <Route path="/" element={<Clock />} />
 
         {/* Open Routes */}
         <Route path="/register" element={<Register />} />
