@@ -25,7 +25,7 @@ const Layout = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50 font-sans">
+    <div className="h-screen flex flex-col  font-sans">
       <Navbar setActiveComponent={setActiveComponent} />
       <div className="flex-1 p-6 overflow-y-auto">{renderComponent()}</div>
     </div>

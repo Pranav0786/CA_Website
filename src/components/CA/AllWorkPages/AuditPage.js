@@ -18,70 +18,61 @@ const AuditPage = () => {
   const [riskMitigation, setRiskMitigation] = useState("");
 
   const handleAddTask = async () => {
-    const newTask = {
-      description: taskDescription,
-      dueDate: taskDueDate,
-      priority: "High",
-    };
-    setAuditTasks((prevTasks) => [...prevTasks, newTask]);
-    setTaskDescription("");
-    setTaskDueDate("");
-
-    try {
-      await db.collection("auditTasks").add(newTask);
-    } catch (error) {
-      console.error("Error adding task to Firestore: ", error);
-    }
+    if (!taskDescription || !taskDueDate) return alert("Fill all task fields!");
+    const newTask = { description: taskDescription, dueDate: taskDueDate, priority: "High" };
+    setAuditTasks((prev) => [...prev, newTask]);
+    setTaskDescription(""); setTaskDueDate("");
+    try { await db.collection("auditTasks").add(newTask); } 
+    catch (error) { console.error("Error adding task: ", error); }
   };
 
-  const handleChangeTab = (tab) => {
-    setActiveTab(tab);
-  };
+  const handleChangeTab = (tab) => setActiveTab(tab);
 
   const handleSubmitReport = async () => {
-    try {
-      await db.collection("auditReports").add(reportDetails);
-    } catch (error) {
-      console.error("Error saving report to Firestore: ", error);
-    }
+    try { await db.collection("auditReports").add(reportDetails); } 
+    catch (error) { console.error("Error saving report: ", error); }
   };
 
   const handleAddRisk = async () => {
-    const newRisk = {
-      description: riskDescription,
-      category: "Financial",
-      mitigation: riskMitigation,
-      status: "Ongoing",
-    };
-    setRiskAssessment((prevRisk) => [...prevRisk, newRisk]);
-    setRiskDescription("");
-    setRiskMitigation("");
-    try {
-      await db.collection("riskAssessments").add(newRisk);
-    } catch (error) {
-      console.error("Error adding risk to Firestore: ", error);
-    }
+    if (!riskDescription || !riskMitigation) return alert("Fill all risk fields!");
+    const newRisk = { description: riskDescription, category: "Financial", mitigation: riskMitigation, status: "Ongoing" };
+    setRiskAssessment((prev) => [...prev, newRisk]);
+    setRiskDescription(""); setRiskMitigation("");
+    try { await db.collection("riskAssessments").add(newRisk); } 
+    catch (error) { console.error("Error adding risk: ", error); }
   };
 
   return (
-    <div className="flex flex-col items-center p-5">
-      <h1 className="text-4xl font-extrabold mb-8">Audit Dashboard</h1>
+    <div className="max-w-4xl mx-auto p-8 rounded-xl shadow-lg">
 
-      <div className="mb-8">
+      {/* Tabs Navigation */}
+      <div className="flex justify-center gap-6 mb-8">
         <button
-          className={`px-6 py-3 mx-3 text-lg font-semibold rounded-lg ${activeTab === "audit-checklist" ? "bg-orange-500 text-white" : "bg-gray-300"}`}
+          className={`px-6 py-3 text-xl font-semibold rounded-lg ${
+            activeTab === "audit-checklist"
+              ? "bg-violet-950 text-white"
+              : "bg-violet-300 text-gray-700"
+          }`}
           onClick={() => handleChangeTab("audit-checklist")}
         >
           Audit Checklist
         </button>
         <button
-          className={`px-6 py-3 mx-3 text-lg font-semibold rounded-lg ${activeTab === "report-templates" ? "bg-orange-500 text-white" : "bg-gray-300"}`}
+          className={`px-6 py-3 text-xl font-semibold rounded-lg ${
+            activeTab === "report-templates"
+              ? "bg-violet-950 text-white"
+              : "bg-violet-300 text-gray-700"
+          }`}
           onClick={() => handleChangeTab("report-templates")}
         >
           Report Templates
         </button>
         <button
-          className={`px-6 py-3 mx-3 text-lg font-semibold rounded-lg ${activeTab === "risk-assessment" ? "bg-orange-500 text-white" : "bg-gray-300"}`}
+          className={`px-6 py-3 text-xl font-semibold rounded-lg ${
+            activeTab === "risk-assessment"
+              ? "bg-violet-950 text-white"
+              : "bg-violet-300 text-gray-700"
+          }`}
           onClick={() => handleChangeTab("risk-assessment")}
         >
           Risk Assessment
@@ -90,7 +81,7 @@ const AuditPage = () => {
 
       {/* Audit Checklist Tab */}
       {activeTab === "audit-checklist" && (
-        <section className="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full">
+        <section className="bg-white/10 backdrop-blur-xl p-8 rounded-xl shadow-md border border-white/10 mb-8 text-white">
           <h2 className="text-2xl font-bold mb-6">Audit Checklist</h2>
           <div className="mb-4">
             <input
@@ -98,137 +89,111 @@ const AuditPage = () => {
               placeholder="Task Description"
               value={taskDescription}
               onChange={(e) => setTaskDescription(e.target.value)}
-              className="w-full p-4 border border-gray-300 rounded-lg mb-4"
+              className="w-full p-4 mb-4 border border-white/20 bg-transparent rounded-lg"
             />
-            <select className="w-full p-4 border border-gray-300 rounded-lg mb-4">
-              <option value="High">High</option>
-              <option value="Low">Low</option>
-            </select>
             <input
               type="date"
               value={taskDueDate}
               onChange={(e) => setTaskDueDate(e.target.value)}
-              className="w-full p-4 border border-gray-300 rounded-lg mb-4"
+              className="w-full p-4 mb-4 border border-white/20 bg-transparent rounded-lg"
             />
             <button
-              className="w-full py-3 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600"
               onClick={handleAddTask}
+              className="w-full py-3 bg-violet-950 text-white rounded-lg font-semibold hover:bg-violet-600"
             >
               Add Task
             </button>
           </div>
 
-          <div>
-            <h3 className="text-xl font-semibold mb-4">Task List</h3>
-            <ul className="list-none p-0">
-              {auditTasks.map((task, index) => (
-                <li key={index} className="p-4 mb-4 border border-gray-300 rounded-lg bg-white">
-                  <p>{task.description} - {task.priority} - Due: {task.dueDate}</p>
-                  <div className="flex gap-4 mt-2">
-                    <input type="checkbox" /> Pending
-                    <input type="checkbox" /> In-Progress
-                    <input type="checkbox" /> Completed
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <h3 className="text-xl font-semibold mb-4">Task List</h3>
+          <ul>
+            {auditTasks.map((task, index) => (
+              <li
+                key={index}
+                className="p-4 mb-4 bg-white/10 border border-white/10 rounded-lg"
+              >
+                <p>{task.description} - {task.priority} - Due: {task.dueDate}</p>
+              </li>
+            ))}
+          </ul>
         </section>
       )}
 
       {/* Report Templates Tab */}
       {activeTab === "report-templates" && (
-        <section className="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full">
+        <section className="bg-white/10 backdrop-blur-xl p-8 rounded-xl shadow-md border border-white/10 mb-8 text-white">
           <h2 className="text-2xl font-bold mb-6">Report Templates</h2>
-          <div className="mb-4">
-            <select className="w-full p-4 border border-gray-300 rounded-lg mb-4">
-              <option value="summary-report">Summary Report</option>
-              <option value="detailed-report">Detailed Report</option>
-            </select>
+          <input
+            type="text"
+            placeholder="Report Title"
+            value={reportDetails.title}
+            onChange={(e) => setReportDetails({ ...reportDetails, title: e.target.value })}
+            className="w-full p-4 mb-4 border border-white/20 bg-transparent rounded-lg"
+          />
+          <textarea
+            placeholder="Remarks"
+            value={reportDetails.remarks}
+            onChange={(e) => setReportDetails({ ...reportDetails, remarks: e.target.value })}
+            className="w-full p-4 mb-4 border border-white/20 bg-transparent rounded-lg"
+          />
+          <div className="flex gap-4 mb-4">
             <input
-              type="text"
-              placeholder="Report Title"
-              value={reportDetails.title}
-              onChange={(e) => setReportDetails({ ...reportDetails, title: e.target.value })}
-              className="w-full p-4 border border-gray-300 rounded-lg mb-4"
+              type="date"
+              value={reportDetails.startDate}
+              onChange={(e) => setReportDetails({ ...reportDetails, startDate: e.target.value })}
+              className="w-1/2 p-4 border border-white/20 bg-transparent rounded-lg"
             />
-            <textarea
-              placeholder="Remarks"
-              value={reportDetails.remarks}
-              onChange={(e) => setReportDetails({ ...reportDetails, remarks: e.target.value })}
-              className="w-full p-4 border border-gray-300 rounded-lg mb-4"
+            <input
+              type="date"
+              value={reportDetails.endDate}
+              onChange={(e) => setReportDetails({ ...reportDetails, endDate: e.target.value })}
+              className="w-1/2 p-4 border border-white/20 bg-transparent rounded-lg"
             />
-            <div className="flex gap-4 mb-4">
-              <div className="w-1/2">
-                <label className="block text-lg font-medium mb-2">Start Date:</label>
-                <input
-                  type="date"
-                  value={reportDetails.startDate}
-                  onChange={(e) => setReportDetails({ ...reportDetails, startDate: e.target.value })}
-                  className="w-full p-4 border border-gray-300 rounded-lg"
-                />
-              </div>
-              <div className="w-1/2">
-                <label className="block text-lg font-medium mb-2">End Date:</label>
-                <input
-                  type="date"
-                  value={reportDetails.endDate}
-                  onChange={(e) => setReportDetails({ ...reportDetails, endDate: e.target.value })}
-                  className="w-full p-4 border border-gray-300 rounded-lg"
-                />
-              </div>
-            </div>
-            <button
-              className="w-full py-3 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600"
-              onClick={handleSubmitReport}
-            >
-              Generate Report
-            </button>
           </div>
+          <button
+            onClick={handleSubmitReport}
+            className="w-full py-3 bg-violet-950 text-white rounded-lg font-semibold hover:bg-violet-600"
+          >
+            Generate Report
+          </button>
         </section>
       )}
 
       {/* Risk Assessment Tab */}
       {activeTab === "risk-assessment" && (
-        <section className="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full">
+        <section className="bg-white/10 backdrop-blur-xl p-8 rounded-xl shadow-md border border-white/10 mb-8 text-white">
           <h2 className="text-2xl font-bold mb-6">Risk Assessment</h2>
-          <div className="mb-4">
-            <input
-              type="text"
-              placeholder="Risk Description"
-              value={riskDescription}
-              onChange={(e) => setRiskDescription(e.target.value)}
-              className="w-full p-4 border border-gray-300 rounded-lg mb-4"
-            />
-            <select className="w-full p-4 border border-gray-300 rounded-lg mb-4">
-              <option value="financial">Financial</option>
-              <option value="compliance">Compliance</option>
-              <option value="operational">Operational</option>
-            </select>
-            <textarea
-              placeholder="Risk Mitigation Plan"
-              value={riskMitigation}
-              onChange={(e) => setRiskMitigation(e.target.value)}
-              className="w-full p-4 border border-gray-300 rounded-lg mb-4"
-            />
-            <button
-              className="w-full py-3 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600"
-              onClick={handleAddRisk}
-            >
-              Add Risk
-            </button>
-          </div>
+          <input
+            type="text"
+            placeholder="Risk Description"
+            value={riskDescription}
+            onChange={(e) => setRiskDescription(e.target.value)}
+            className="w-full p-4 mb-4 border border-white/20 bg-transparent rounded-lg"
+          />
+          <textarea
+            placeholder="Risk Mitigation Plan"
+            value={riskMitigation}
+            onChange={(e) => setRiskMitigation(e.target.value)}
+            className="w-full p-4 mb-4 border border-white/20 bg-transparent rounded-lg"
+          />
+          <button
+            onClick={handleAddRisk}
+            className="w-full py-3 bg-violet-950 text-white rounded-lg font-semibold hover:bg-violet-600"
+          >
+            Add Risk
+          </button>
 
-          <div>
-            <h3 className="text-xl font-semibold mb-4">Risk List</h3>
-            <ul className="list-none p-0">
-              {riskAssessment.map((risk, index) => (
-                <li key={index} className="p-4 mb-4 border border-gray-300 rounded-lg bg-white">
-                  <p>{risk.description} - {risk.category} - Mitigation: {risk.mitigation}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <h3 className="text-xl font-semibold mt-6 mb-4">Risk List</h3>
+          <ul>
+            {riskAssessment.map((risk, index) => (
+              <li
+                key={index}
+                className="p-4 mb-4 bg-white/10 border border-white/10 rounded-lg"
+              >
+                {risk.description} - {risk.category} - Mitigation: {risk.mitigation}
+              </li>
+            ))}
+          </ul>
         </section>
       )}
     </div>
