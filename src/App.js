@@ -34,6 +34,7 @@ const App = () => {
 
         {/* Protected Businessman Routes */}
         <Route path="/businessman" element={<ProtectedRoute allowedRole="Businessman"><Businessman /></ProtectedRoute>} />
+
       </Routes>
 
     </BrowserRouter>
