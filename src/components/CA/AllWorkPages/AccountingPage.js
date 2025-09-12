@@ -136,7 +136,7 @@ const AccountingPage = () => {
           <label className="flex items-center text-lg font-medium text-gray-300 mb-2"><FontAwesomeIcon icon={faCalendar} className="mr-3" /> End Date:</label>
           <input type="date" onChange={(e) => setReportData({ ...reportData, endDate: e.target.value })} className="w-full p-4 border border-white/10 rounded-lg mb-6 bg-transparent focus:border-blue-500 focus:ring-2 focus:ring-blue-500" />
 
-          <button onClick={handleReportGeneration} className="w-full bg-violet-950 text-white py-3 rounded-lg font-semibold hover:bg-orange-600">Generate Report</button>
+          <button onClick={handleReportGeneration} className="w-full bg-gradient-to-r from-violet-600 to-violet-900 text-white py-3 rounded-lg font-semibold hover:from-violet-500 hover:to-violet-800 transition-all">Generate Report</button>
         </section>
       )}
 
