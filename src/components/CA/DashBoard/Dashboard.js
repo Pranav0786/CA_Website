@@ -30,7 +30,7 @@ const Dashboard = () => {
   const [risks, setRisks] = useState([]);
   const [taxData, setTaxData] = useState([]);
   const [regulatoryData, setRegulatoryData] = useState([]);
-  const [selectedTaxId, setSelectedTaxId] = useState(""); // <-- Add this
+  const [selectedTaxId, setSelectedTaxId] = useState(""); 
 
   const user = auth.currentUser;
 

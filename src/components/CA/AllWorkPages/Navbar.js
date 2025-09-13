@@ -4,7 +4,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import { auth, db } from "../../../firebase";
 import { doc, getDoc, collection, query, where, getDocs } from "firebase/firestore";
 
-// ✅ Import your logo
+//  Import your logo
 import caLogo from "../../../assets/image.png"; // <-- adjust path to your logo
 
 const Navbar = ({ setActiveComponent }) => {
@@ -12,7 +12,7 @@ const Navbar = ({ setActiveComponent }) => {
   const [showProfile, setShowProfile] = useState(false);
   const [profile, setProfile] = useState(null);
 
-  // ✅ Fetch profile
+  //  Fetch profile
   useEffect(() => {
     const fetchProfile = async () => {
       const user = auth.currentUser;
@@ -50,10 +50,9 @@ const Navbar = ({ setActiveComponent }) => {
 
   return (
     <aside className="h-screen w-64 bg-gradient-to-b from-black/80 via-gray-900/80 to-black/90 backdrop-blur-xl border-r border-white/10 p-6 shadow-lg flex flex-col">
-      {/* ✅ Logo & App Title */}
       <div
         className="flex items-center space-x-3 cursor-pointer mb-10"
-        onClick={() => navigate("/")} // ✅ Redirect to home
+        onClick={() => navigate("/")} //  Redirect to home
       >
         <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-blue-400 shadow-lg">
           <img

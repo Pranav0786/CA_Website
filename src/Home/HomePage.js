@@ -16,15 +16,9 @@ import clientImg from "../assets/client_management.jpg";
 import documentImg from "../assets/document_management_system.jpg";
 import analyticsImg from "../assets/business_analytics_visualization.jpg";
 
-// Hero background images
-import hero1 from "../assets/image1.png";
-import hero2 from "../assets/image2.png";
-import hero3 from "../assets/image3.png";
-import hero4 from "../assets/image4.png";
-import hero5 from "../assets/image5.png";
-import hero6 from "../assets/image6.png";
 
-import { FaArrowUp } from "react-icons/fa";  // ✅ only keep this
+
+import { FaArrowUp } from "react-icons/fa";  //  only keep this
 import lineChartVideo from '../assets/0_Financial_Data_Stock_Market_3840x2160.mp4';
 import businessVideo from "../assets/573278_Business_Stock_3840x2160.mp4";
 
@@ -37,39 +31,6 @@ const Home = () => {
     { title: "Document Management", img: documentImg },
     { title: "Business Analytics", img: analyticsImg },
   ];
-
-  // Images for hero slider
-  const heroImages = [hero1, hero2, hero3, hero4, hero5, hero6];
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  // Auto slide every 5 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % heroImages.length);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, [heroImages.length]);
-
-   const [percentage, setPercentage] = useState(0);
-
-  // Animate percentage counter
-  useEffect(() => {
-    let start = 0;
-    const end = 3.9; // target percentage
-    const duration = 2000; // 2 seconds
-    const increment = end / (duration / 30);
-
-    const counter = setInterval(() => {
-      start += increment;
-      if (start >= end) {
-        start = end;
-        clearInterval(counter);
-      }
-      setPercentage(start.toFixed(1)); // show 1 decimal place
-    }, 30);
-
-    return () => clearInterval(counter);
-  }, []);
 
   // Rotating Quotes
 const quotes = [
@@ -95,9 +56,9 @@ useEffect(() => {
     <div className="w-full text-white font-sans relative scroll-smooth">
       {/* Navbar */}
       <Navbar />
-<section
+      <section
   id="hero"
-  className="relative min-h-screen flex flex-col justify-center items-center px-6 text-white overflow-hidden pt-24"
+  className="relative min-h-screen flex flex-col justify-center items-center rounded-3xl px-6 text-white overflow-hidden pt-24"
 >
   {/* Background Video */}
   <video
@@ -109,87 +70,133 @@ useEffect(() => {
     className="absolute inset-0 w-full h-full object-cover z-0"
   />
 
-  {/* Dark overlay */}
+  {/* Dark overlay + gradient */}
+  <div className="absolute inset-0 bg-black/40 z-10"></div>
+  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black z-10"></div>
 
-   {/* Dark overlay */}
-  <div className="absolute inset-0 bg-black/60 z-10"></div>
+  {/* Floating glowing circles for glamour */}
+  <div className="absolute top-20 left-20 w-40 h-40 bg-cyan-400/20 rounded-full blur-3xl animate-pulse z-0"></div>
+  <div className="absolute bottom-20 right-20 w-52 h-52 bg-pink-500/20 rounded-full blur-3xl animate-bounce z-0"></div>
 
   {/* Centered Content */}
-<div className="relative z-20 max-w-4xl mx-auto flex flex-col items-center space-y-6">
-  <motion.h1
-    initial={{ opacity: 0, y: -40 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6 }}
-    className="text-4xl md:text-5xl font-extrabold leading-tight"
-  >
-    Welcome to <span className="text-cyan-400">CA Hub</span>
-  </motion.h1>
+  <div className="relative z-20 max-w-5xl mx-auto flex flex-col items-center space-y-8 text-center">
+    {/* Title */}
+    <motion.h1
+      initial={{ opacity: 0, y: -40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="text-4xl md:text-6xl font-extrabold leading-tight"
+    >
+      Welcome to{" "}
+      <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+        CA Hub
+      </span>
+    </motion.h1>
 
-    {/* ✅ Rotating Quotes */}
-  <motion.p
-    key={currentQuote} // ensures animation runs when quote changes
-    initial={{ opacity: 0, y: 10 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -10 }}
-    transition={{ duration: 0.8 }}
-    className="italic bold text-lg text-red-500 text-center max-w-2xl"
-  >
-    "{currentQuote}"
-  </motion.p>
+    {/* Animated tagline */}
+    <motion.p
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.8, duration: 1 }}
+      className="text-lg md:text-2xl text-yellow-300 font-semibold"
+    >
+      Empowering Businesses with{" "}
+      <span className="text-pink-400">Finance + Technology</span>
+    </motion.p>
 
-  <motion.p
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 1 }}
-    className="text-gray-200 text-lg md:text-xl leading-relaxed"
-  >
-    Your one-stop platform for{" "}
-    <span className="text-yellow-400 font-semibold">Accounting</span>,{" "}
-    <span className="text-pink-400 font-semibold">Taxation</span>,{" "}
-    <span className="text-cyan-300 font-semibold">Audit</span>, and{" "}
-    <span className="text-green-400 font-semibold">Business Advisory</span>.
-    <br className="hidden md:block" />
-    At CA Hub, we blend financial expertise with modern technology to simplify
-    complex processes, ensure compliance, and empower businesses with
-    real-time insights.
-  </motion.p>
+    {/* Rotating Quotes */}
+    <motion.p
+      key={currentQuote}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.8 }}
+      className="italic text-lg text-red-400 max-w-2xl"
+    >
+      "{currentQuote}"
+    </motion.p>
 
+    {/* Description */}
+    <motion.p
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+      className="text-gray-200 text-lg md:text-xl leading-relaxed max-w-3xl"
+    >
+      Your one-stop platform for{" "}
+      <span className="text-yellow-400 font-semibold">Accounting</span>,{" "}
+      <span className="text-pink-400 font-semibold">Taxation</span>,{" "}
+      <span className="text-cyan-300 font-semibold">Audit</span>, and{" "}
+      <span className="text-green-400 font-semibold">Business Advisory</span>.
+      <br className="hidden md:block" />
+      At CA Hub, we blend financial expertise with modern technology to simplify
+      complex processes, ensure compliance, and empower businesses with
+      real-time insights.
+    </motion.p>
 
+    {/* CTA Buttons */}
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: 1.2, duration: 0.8 }}
+      className="flex gap-6 mt-6"
+    >
+      <button className="px-8 py-3 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 text-black font-bold shadow-lg hover:shadow-cyan-500/50 transition-all duration-300">
+        Get Started
+      </button>
+      <button className="px-8 py-3 rounded-full border border-cyan-400 text-cyan-300 font-semibold hover:bg-cyan-500/20 transition-all duration-300">
+        Explore Services
+      </button>
+    </motion.div>
 
-  <div className="flex space-x-4 pt-4">
-    <button className="px-6 py-3 bg-cyan-400 hover:bg-cyan-500 text-black font-semibold rounded-lg transition">
-      Explore Services
-    </button>
-    <button className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg transition">
-      Contact Us
-    </button>
+    {/* Stats */}
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12 text-center">
+      {[
+        { label: "Clients", value: "500+" },
+        { label: "Audits", value: "1200+" },
+        { label: "Tax Filings", value: "3000+" },
+        { label: "Years Exp.", value: "10+" },
+      ].map((stat, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5 + i * 0.2 }}
+          className="flex flex-col"
+        >
+          <span className="text-3xl font-extrabold text-cyan-400">{stat.value}</span>
+          <span className="text-gray-300">{stat.label}</span>
+        </motion.div>
+      ))}
+    </div>
   </div>
-</div>
 
+  
 </section>
 
-
-
-{/* About Section */}
 {/* About Section */}
 <section
   id="about"
-  className="relative px-6 py-16 border-2 border-transparent rounded-3xl
-  before:absolute before:inset-0 before:rounded-3xl 
-  before:border-2 before:border-cyan-400 
-  before:shadow-[0_0_25px_rgba(34,211,238,0.9),0_0_50px_rgba(34,211,238,0.6)] 
-  before:animate-pulse before:pointer-events-none"
+  className="relative px-6 py-20 border-2 border-transparent rounded-3xl
+  overflow-hidden"
 >
-  <div className="absolute inset-0 bg-black/60 backdrop-blur-md rounded-3xl"></div>
+  {/* Animated Background Glow */}
+  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/10 to-pink-500/10 blur-3xl animate-pulse rounded-3xl"></div>
+  <div className="absolute inset-0 bg-black/70 backdrop-blur-xl rounded-3xl"></div>
 
-  <div className="relative z-10 max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+  {/* Decorative Floating Circles */}
+  <div className="absolute w-32 h-32 bg-cyan-500/20 rounded-full blur-2xl animate-bounce top-10 left-10"></div>
+  <div className="absolute w-40 h-40 bg-pink-500/20 rounded-full blur-2xl animate-pulse bottom-10 right-10"></div>
+
+  <div className="relative z-10 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
     {/* Left Content */}
-    <div className="text-center md:text-left space-y-6">
+    <div className="text-center md:text-left space-y-8">
       <motion.h2
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-2xl md:text-3xl font-bold text-cyan-400"
+        className="text-3xl md:text-4xl font-extrabold 
+        text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500"
       >
         About Us
       </motion.h2>
@@ -200,26 +207,32 @@ useEffect(() => {
         transition={{ duration: 1 }}
         className="text-lg text-gray-200 max-w-4xl leading-relaxed"
       >
-        At <span className="text-cyan-400 font-semibold">CA Portal</span>, we combine 
-        <span className="text-yellow-400"> financial expertise</span> with 
+        At <span className="text-cyan-400 font-semibold animate-pulse">CA Portal</span>, 
+        we combine <span className="text-yellow-400">financial expertise</span> with 
         <span className="text-pink-400"> modern technology</span> to deliver seamless 
         accounting, taxation, and audit solutions.  
         <br className="hidden md:block" />
         Our mission is to simplify complex financial processes, empower businesses with 
-        real-time insights, and ensure <span className="text-cyan-300">complete transparency</span> 
-        in every transaction.
+        <span className="bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent font-bold animate-gradient-x"> real-time insights</span>, 
+        and ensure <span className="text-cyan-300">complete transparency</span> in every transaction.
       </motion.p>
 
-      {/* Decorative Line */}
-      <div className="mt-6 w-32 h-[2px] bg-gradient-to-r from-cyan-400 via-blue-500 to-pink-500 rounded-full"></div>
+      {/* Decorative Line Animation */}
+      <motion.div
+        initial={{ width: 0 }}
+        whileInView={{ width: "8rem" }}
+        transition={{ duration: 1 }}
+        className="h-[3px] bg-gradient-to-r from-cyan-400 via-blue-500 to-pink-500 rounded-full"
+      ></motion.div>
     </div>
 
     {/* Right Side Video */}
     <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={{ opacity: 0, scale: 0.85 }}
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1 }}
-      className="flex justify-center md:justify-end"
+      whileHover={{ scale: 1.05, rotate: 1 }}
+      className="flex justify-center md:justify-end relative group"
     >
       <video
         src={businessVideo}
@@ -227,63 +240,76 @@ useEffect(() => {
         loop
         muted
         playsInline
-        className="w-full max-w-md md:max-w-lg lg:max-w-xl rounded-3xl shadow-2xl object-cover"
+        className="w-full max-w-md md:max-w-lg lg:max-w-xl rounded-3xl shadow-2xl object-cover 
+        border-2 border-transparent group-hover:border-cyan-400 transition-all duration-500"
       />
+      {/* Glow effect on hover */}
+      <div className="absolute inset-0 rounded-3xl border-2 border-transparent 
+      group-hover:border-cyan-400 group-hover:shadow-[0_0_30px_rgba(34,211,238,0.9),0_0_60px_rgba(236,72,153,0.6)] transition duration-700"></div>
     </motion.div>
   </div>
 </section>
 
 
-      {/* Services Section */}
-      <section
-        id="services"
-        className="relative flex flex-col items-center justify-center px-6 py-16 text-center 
-        border-2 border-transparent rounded-3xl
-        before:absolute before:inset-0 before:rounded-3xl 
-        before:border-2 before:border-blue-500 
-        before:shadow-[0_0_25px_rgba(59,130,246,0.9),0_0_50px_rgba(59,130,246,0.6)] 
-        before:animate-pulse before:pointer-events-none"
+  {/* Services Section */}
+<section
+  id="services"
+  className="relative flex flex-col items-center justify-center px-6 py-20 text-center
+  bg-gradient-to-br from-gray-900 via-black to-gray-800
+  border-2 border-transparent rounded-3xl overflow-hidden"
+>
+  {/* Animated Background Gradient Glow */}
+  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-blue-500/10 blur-3xl animate-pulse"></div>
+
+  <motion.h2
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+    className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text 
+    bg-gradient-to-r from-cyan-400 via-blue-400 to-violet-500 mb-14 relative z-10"
+  >
+    🚀 Our Services
+  </motion.h2>
+
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 max-w-6xl relative z-10">
+    {services.map((service, index) => (
+      <motion.div
+        key={index}
+        whileHover={{ scale: 1.05, rotate: 1 }}
+        transition={{ type: "spring", stiffness: 200 }}
+        className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-2xl shadow-xl cursor-pointer
+        bg-white/5 backdrop-blur-lg border border-white/20
+        transition-all duration-700 group overflow-hidden mx-auto"
       >
-        <motion.h2
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-2xl md:text-3xl font-bold text-cyan-400 mb-10 relative z-10"
-        >
-          Our Services
-        </motion.h2>
+        {/* Background Image */}
+        <img
+          src={service.img}
+          alt={service.title}
+          className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-70 transition duration-700 rounded-2xl"
+        />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl relative z-10">
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              whileHover={{ scale: 1.08 }}
-              className="relative w-72 h-72 rounded-2xl overflow-hidden shadow-xl cursor-pointer 
-              bg-white/10 backdrop-blur-md border border-transparent 
-              transition-all duration-500 group"
-            >
-              <img
-                src={service.img}
-                alt={service.title}
-                className="w-full h-full object-cover rounded-xl transition-transform duration-700 group-hover:scale-110"
-              />
+        {/* Overlay Glow */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/30 via-violet-500/30 to-blue-600/30 opacity-0 group-hover:opacity-100 transition duration-500"></div>
 
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 via-black/30 to-cyan-500/20 
-              opacity-0 group-hover:opacity-100 transition duration-500"></div>
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center justify-center h-full p-4">
+          <h3 className="text-xl sm:text-2xl font-bold text-yellow-400 drop-shadow group-hover:animate-pulse text-center">
+            {service.title}
+          </h3>
 
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500">
-                <h3 className="text-2xl font-extrabold text-yellow-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.9)] group-hover:animate-pulse">
-                  {service.title}
-                </h3>
-              </div>
-
-              <div className="absolute inset-0 rounded-2xl border-2 border-transparent 
-              group-hover:border-cyan-400 group-hover:shadow-[0_0_20px_rgba(34,211,238,0.8),0_0_40px_rgba(34,211,238,0.6)] 
-              transition duration-500"></div>
-            </motion.div>
-          ))}
+          <p className="mt-2 text-gray-300 text-sm sm:text-base leading-relaxed text-center">
+            {service.description || "We provide top-notch solutions tailored to your needs."}
+          </p>
         </div>
-      </section>
+
+        {/* Border Glow */}
+        <div className="absolute inset-0 rounded-2xl border-2 border-transparent 
+        group-hover:border-cyan-400 group-hover:shadow-[0_0_20px_rgba(34,211,238,0.9),0_0_40px_rgba(34,211,238,0.7)] 
+        transition duration-700"></div>
+      </motion.div>
+    ))}
+  </div>
+</section>
 
       {/* Contact Section */}
 <section
