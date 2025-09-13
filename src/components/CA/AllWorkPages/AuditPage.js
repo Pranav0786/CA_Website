@@ -20,7 +20,6 @@ const AuditPage = () => {
 
   const user = auth.currentUser; // Logged-in user
 
-  // ✅ Add Task to Firestore (CAtask table)
   const handleAddTask = async () => {
     if (!user) return alert("You must be logged in!");
     if (!taskDescription || !taskDueDate) return alert("Fill all task fields!");
@@ -45,7 +44,6 @@ const AuditPage = () => {
     }
   };
 
-  // ✅ Save Report in Firestore (reporttemplate table)
   const handleSubmitReport = async () => {
     if (!user) return alert("You must be logged in!");
     if (!reportDetails.title || !reportDetails.startDate || !reportDetails.endDate) {
@@ -67,7 +65,6 @@ const AuditPage = () => {
     }
   };
 
-  // ✅ Save Risk Assessment in Firestore (riskassess table)
   const handleAddRisk = async () => {
     if (!user) return alert("You must be logged in!");
     if (!riskDescription || !riskMitigation) return alert("Fill all risk fields!");

@@ -12,13 +12,14 @@ import AuditPage from "./components/CA/AllWorkPages/AuditPage";
 import HeroSection from "./components/HomePage/HeroSection";
 import Layout from "./components/CA/AllWorkPages/Layout";
 import ProtectedRoute from "./pages/ProtectedRotes/ProtectedRoute";
+import Home from './Home/HomePage';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         {/* Common Routes */}
-        {/*<Route path="/" element={<Loader />} />*/}
+        {<Route path="/" element={<Home />} />}
         <Route path="/hero" element={<HeroSection />} />
 
         {/* Open Routes */}

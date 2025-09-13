@@ -5,7 +5,6 @@ import Accounting from "./AccountingPage";
 import Taxation from "./TaxationPage";
 import Audits from "./AuditPage";
 
-
 const Layout = () => {
   const [activeComponent, setActiveComponent] = useState("dashboard");
 
@@ -25,8 +24,11 @@ const Layout = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col  font-sans">
+    <div className="h-screen flex font-sans">
+      {/* Left Sidebar */}
       <Navbar setActiveComponent={setActiveComponent} />
+
+      {/* Main Content */}
       <div className="flex-1 p-6 overflow-y-auto">{renderComponent()}</div>
     </div>
   );
