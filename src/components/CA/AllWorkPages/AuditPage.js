@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { db } from "../../../firebase";
+import { db, auth } from "../../../firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 const AuditPage = () => {
   const [activeTab, setActiveTab] = useState("audit-checklist");
@@ -17,34 +18,85 @@ const AuditPage = () => {
   const [riskDescription, setRiskDescription] = useState("");
   const [riskMitigation, setRiskMitigation] = useState("");
 
+  const user = auth.currentUser; // Logged-in user
+
+  // ✅ Add Task to Firestore (CAtask table)
   const handleAddTask = async () => {
+    if (!user) return alert("You must be logged in!");
     if (!taskDescription || !taskDueDate) return alert("Fill all task fields!");
-    const newTask = { description: taskDescription, dueDate: taskDueDate, priority: "High" };
+
+    const newTask = {
+      description: taskDescription,
+      dueDate: taskDueDate,
+      priority: "High",
+      createdAt: new Date(),
+      caId: user.uid, // associate with user
+    };
+
     setAuditTasks((prev) => [...prev, newTask]);
-    setTaskDescription(""); setTaskDueDate("");
-    try { await db.collection("auditTasks").add(newTask); } 
-    catch (error) { console.error("Error adding task: ", error); }
+    setTaskDescription("");
+    setTaskDueDate("");
+
+    try {
+      await addDoc(collection(db, "CAtask"), newTask);
+      console.log("Task saved:", newTask);
+    } catch (error) {
+      console.error("Error adding task: ", error);
+    }
+  };
+
+  // ✅ Save Report in Firestore (reporttemplate table)
+  const handleSubmitReport = async () => {
+    if (!user) return alert("You must be logged in!");
+    if (!reportDetails.title || !reportDetails.startDate || !reportDetails.endDate) {
+      return alert("Fill all report fields!");
+    }
+
+    try {
+      const reportData = { 
+        ...reportDetails, 
+        createdAt: new Date(), 
+        caId: user.uid // associate with user
+      };
+      await addDoc(collection(db, "reporttemplate"), reportData);
+      console.log("Report saved:", reportData);
+      alert("Report Template saved!");
+      setReportDetails({ title: "", remarks: "", startDate: "", endDate: "" });
+    } catch (error) {
+      console.error("Error saving report: ", error);
+    }
+  };
+
+  // ✅ Save Risk Assessment in Firestore (riskassess table)
+  const handleAddRisk = async () => {
+    if (!user) return alert("You must be logged in!");
+    if (!riskDescription || !riskMitigation) return alert("Fill all risk fields!");
+
+    const newRisk = {
+      description: riskDescription,
+      category: "Financial",
+      mitigation: riskMitigation,
+      status: "Ongoing",
+      createdAt: new Date(),
+      caId: user.uid, // associate with user
+    };
+
+    setRiskAssessment((prev) => [...prev, newRisk]);
+    setRiskDescription("");
+    setRiskMitigation("");
+
+    try {
+      await addDoc(collection(db, "riskassess"), newRisk);
+      console.log("Risk saved:", newRisk);
+    } catch (error) {
+      console.error("Error adding risk: ", error);
+    }
   };
 
   const handleChangeTab = (tab) => setActiveTab(tab);
 
-  const handleSubmitReport = async () => {
-    try { await db.collection("auditReports").add(reportDetails); } 
-    catch (error) { console.error("Error saving report: ", error); }
-  };
-
-  const handleAddRisk = async () => {
-    if (!riskDescription || !riskMitigation) return alert("Fill all risk fields!");
-    const newRisk = { description: riskDescription, category: "Financial", mitigation: riskMitigation, status: "Ongoing" };
-    setRiskAssessment((prev) => [...prev, newRisk]);
-    setRiskDescription(""); setRiskMitigation("");
-    try { await db.collection("riskAssessments").add(newRisk); } 
-    catch (error) { console.error("Error adding risk: ", error); }
-  };
-
   return (
     <div className="max-w-4xl mx-auto p-8 rounded-xl shadow-lg">
-
       {/* Tabs Navigation */}
       <div className="flex justify-center gap-6 mb-8">
         <button
@@ -112,7 +164,9 @@ const AuditPage = () => {
                 key={index}
                 className="p-4 mb-4 bg-white/10 border border-white/10 rounded-lg"
               >
-                <p>{task.description} - {task.priority} - Due: {task.dueDate}</p>
+                <p>
+                  {task.description} - {task.priority} - Due: {task.dueDate}
+                </p>
               </li>
             ))}
           </ul>
@@ -127,26 +181,34 @@ const AuditPage = () => {
             type="text"
             placeholder="Report Title"
             value={reportDetails.title}
-            onChange={(e) => setReportDetails({ ...reportDetails, title: e.target.value })}
+            onChange={(e) =>
+              setReportDetails({ ...reportDetails, title: e.target.value })
+            }
             className="w-full p-4 mb-4 border border-white/20 bg-transparent rounded-lg"
           />
           <textarea
             placeholder="Remarks"
             value={reportDetails.remarks}
-            onChange={(e) => setReportDetails({ ...reportDetails, remarks: e.target.value })}
+            onChange={(e) =>
+              setReportDetails({ ...reportDetails, remarks: e.target.value })
+            }
             className="w-full p-4 mb-4 border border-white/20 bg-transparent rounded-lg"
           />
           <div className="flex gap-4 mb-4">
             <input
               type="date"
               value={reportDetails.startDate}
-              onChange={(e) => setReportDetails({ ...reportDetails, startDate: e.target.value })}
+              onChange={(e) =>
+                setReportDetails({ ...reportDetails, startDate: e.target.value })
+              }
               className="w-1/2 p-4 border border-white/20 bg-transparent rounded-lg"
             />
             <input
               type="date"
               value={reportDetails.endDate}
-              onChange={(e) => setReportDetails({ ...reportDetails, endDate: e.target.value })}
+              onChange={(e) =>
+                setReportDetails({ ...reportDetails, endDate: e.target.value })
+              }
               className="w-1/2 p-4 border border-white/20 bg-transparent rounded-lg"
             />
           </div>
@@ -190,7 +252,8 @@ const AuditPage = () => {
                 key={index}
                 className="p-4 mb-4 bg-white/10 border border-white/10 rounded-lg"
               >
-                {risk.description} - {risk.category} - Mitigation: {risk.mitigation}
+                {risk.description} - {risk.category} - Mitigation:{" "}
+                {risk.mitigation}
               </li>
             ))}
           </ul>
