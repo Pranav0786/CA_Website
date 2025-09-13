@@ -9,7 +9,6 @@ import Businessman from "./components/Businessman/Businessman";
 import AccountingPage from "./components/CA/AllWorkPages/AccountingPage";
 import TaxationPage from "./components/CA/AllWorkPages/TaxationPage";
 import AuditPage from "./components/CA/AllWorkPages/AuditPage";
-import HeroSection from "./components/HomePage/HeroSection";
 import Layout from "./components/CA/AllWorkPages/Layout";
 import ProtectedRoute from "./pages/ProtectedRotes/ProtectedRoute";
 import Home from './Home/HomePage';
@@ -20,7 +19,6 @@ const App = () => {
       <Routes>
         {/* Common Routes */}
         {<Route path="/" element={<Home />} />}
-        <Route path="/hero" element={<HeroSection />} />
 
         {/* Open Routes */}
         <Route path="/register" element={<Register />} />
