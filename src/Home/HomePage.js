@@ -121,7 +121,7 @@ useEffect(() => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
-      className="text-gray-200 text-lg md:text-xl leading-relaxed max-w-3xl"
+      className="text-gray-200 text-lg md:text-xl leading-relaxed max-w-3xl "
     >
       Your one-stop platform for{" "}
       <span className="text-yellow-400 font-semibold">Accounting</span>,{" "}

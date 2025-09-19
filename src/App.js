@@ -12,6 +12,7 @@ import AuditPage from "./components/CA/AllWorkPages/AuditPage";
 import Layout from "./components/CA/AllWorkPages/Layout";
 import ProtectedRoute from "./pages/ProtectedRotes/ProtectedRoute";
 import Home from './Home/HomePage';
+import BusinessDashboard from "./components/Businessman/DashBoard/DashBoard";
 
 const App = () => {
   return (
@@ -33,7 +34,8 @@ const App = () => {
 
         {/* Protected Businessman Routes */}
         <Route path="/businessman" element={<ProtectedRoute allowedRole="Businessman"><Businessman /></ProtectedRoute>} />
-
+        <Route path="/businessDash" element={<ProtectedRoute allowedRole="Businessman"><BusinessDashboard /></ProtectedRoute>} />
+        
       </Routes>
 
     </BrowserRouter>
